@@ -9,10 +9,11 @@ import android.os.Bundle;
   * Copyright (c) Anna Laufey Stefánsdóttir  
   */
 
-public class InstructionsActivity extends Activity {
+public class GameActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_instructions);
+        setContentView(R.layout.activity_game);
     }
+
 }
