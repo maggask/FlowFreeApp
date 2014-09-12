@@ -1,4 +1,4 @@
-package com.example.ATracePath;
+package is.ru.FlowFreeApp;
 
 import android.app.Activity;
 import android.app.ListActivity;

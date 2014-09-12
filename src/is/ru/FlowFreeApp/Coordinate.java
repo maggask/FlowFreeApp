@@ -1,4 +1,4 @@
-package com.example.ATracePath;
+package is.ru.FlowFreeApp;
 
 /**
  * Created by yngvi on 5.9.2014.

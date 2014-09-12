@@ -1,4 +1,4 @@
-package com.example.ATracePath;
+package is.ru.FlowFreeApp;
 
 import android.content.Context;
 import android.graphics.*;
