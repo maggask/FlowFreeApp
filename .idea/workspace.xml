@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="ba512d2b-cf61-4f4c-96ce-57d15b322b0b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/is/ru/FlowFreeApp/Board.java" afterPath="$PROJECT_DIR$/src/is/ru/FlowFreeApp/Board.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/is/ru/FlowFreeApp/Cellpath.java" afterPath="$PROJECT_DIR$/src/is/ru/FlowFreeApp/Cellpath.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/is/ru/FlowFreeApp/ColorListActivity.java" afterPath="$PROJECT_DIR$/src/is/ru/FlowFreeApp/ColorListActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/is/ru/FlowFreeApp/Coordinate.java" afterPath="$PROJECT_DIR$/src/is/ru/FlowFreeApp/Coordinate.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/is/ru/FlowFreeApp/MainActivity.java" afterPath="$PROJECT_DIR$/src/is/ru/FlowFreeApp/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/is/ru/FlowFreeApp/PlayActivity.java" afterPath="$PROJECT_DIR$/src/is/ru/FlowFreeApp/PlayActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="FlowFreeApp.iws" />
@@ -31,21 +31,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MyActivity.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="MyActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/is/ru/FlowFreeApp/MyActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.18472469" vertical-offset="0" max-vertical-offset="563">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="520">
               <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainActivity.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="MainActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/is/ru/FlowFreeApp/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="832">
-              <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.6305506" vertical-offset="35" max-vertical-offset="598">
+              <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="572">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -118,8 +128,8 @@
         <option value="$PROJECT_DIR$/src/is/ru/FlowFreeApp/Cellpath.java" />
         <option value="$PROJECT_DIR$/src/is/ru/FlowFreeApp/ColorListActivity.java" />
         <option value="$PROJECT_DIR$/src/is/ru/FlowFreeApp/Coordinate.java" />
-        <option value="$PROJECT_DIR$/src/is/ru/FlowFreeApp/MainActivity.java" />
         <option value="$PROJECT_DIR$/src/is/ru/FlowFreeApp/PlayActivity.java" />
+        <option value="$PROJECT_DIR$/src/is/ru/FlowFreeApp/MainActivity.java" />
       </list>
     </option>
   </component>
@@ -462,12 +472,12 @@
       <created>1410527396209</created>
       <updated>1410527396209</updated>
       <workItem from="1410527398406" duration="876000" />
-      <workItem from="1410530010608" duration="236000" />
+      <workItem from="1410530010608" duration="529000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1112000" />
+    <option name="totallyTimeSpent" value="1405000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="25" width="1920" height="1055" extended-state="6" />
@@ -567,14 +577,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/is/ru/FlowFreeApp/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="832">
-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/is/ru/FlowFreeApp/PlayActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="21" max-vertical-offset="676">
@@ -585,8 +587,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/is/ru/FlowFreeApp/MyActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.18472469" vertical-offset="0" max-vertical-offset="563">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="520">
           <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="572">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/is/ru/FlowFreeApp/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6305506" vertical-offset="35" max-vertical-offset="598">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
           <folding />
         </state>
       </provider>
