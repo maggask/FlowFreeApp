@@ -17,7 +17,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
     }
 
-    /*public void buttonClick( View view ) {
+    public void buttonClick( View view ) {
         Button button = (Button) view;
         int id = button.getId();
         if ( id == R.id.button_play ) {
