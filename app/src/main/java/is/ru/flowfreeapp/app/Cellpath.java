@@ -1,5 +1,6 @@
 package is.ru.flowfreeapp.app;
 
+import android.graphics.Canvas;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -12,10 +13,10 @@ public class Cellpath {
 
     private ArrayList<Coordinate> m_path = new ArrayList<Coordinate>();
 
-    public void append( Coordinate co ) {
-        int idx = m_path.indexOf(  co );
-        if ( idx >= 0 ) {
-            for ( int i=m_path.size()-1; i > idx; --i ) {
+    public void append(Coordinate co) {
+        int idx = m_path.indexOf(co);
+        if (idx >= 0) {
+            for (int i = m_path.size() - 1; i > idx; --i) {
                 m_path.remove(i);
             }
         }

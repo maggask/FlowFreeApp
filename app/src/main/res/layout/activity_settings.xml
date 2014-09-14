@@ -11,5 +11,23 @@
             android:text="Settings"
             android:id="@+id/textView"
             android:layout_gravity="center_horizontal"
-            android:textSize="40sp"/>
+            android:textSize="40sp" android:paddingBottom="50dp"/>
+    <Switch
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Vibrations"
+            android:id="@+id/switch1" android:checked="false" android:textSize="35dp" android:paddingTop="20dp"
+            android:layout_marginLeft="20dp" android:layout_marginRight="20dp"/>
+    <Switch
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Sound"
+            android:id="@+id/switch2" android:checked="false" android:textSize="35dp" android:paddingTop="20dp"
+            android:layout_marginLeft="20dp" android:layout_marginRight="20dp"/>
+    <Switch
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Letters"
+            android:id="@+id/switch3" android:checked="false" android:paddingTop="20dp" android:textSize="35dp"
+            android:layout_marginLeft="20dp" android:layout_marginRight="20dp"/>
 </LinearLayout>
