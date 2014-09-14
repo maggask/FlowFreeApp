@@ -23,8 +23,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ba512d2b-cf61-4f4c-96ce-57d15b322b0b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_play.xml" />
-      <change type="DELETED" beforePath="C:\Users\Anna\Documents\GitHub\FlowFreeApp\app\src\main\res\layout\activity_play" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="FlowFreeApp.iws" />
@@ -1750,7 +1748,7 @@
       <workItem from="1410533272685" duration="1243000" />
       <workItem from="1410536014022" duration="3464000" />
       <workItem from="1410539958585" duration="9343000" />
-      <workItem from="1410711975417" duration="1462000" />
+      <workItem from="1410711975417" duration="1890000" />
     </task>
     <task id="LOCAL-00001" summary="Go from main activity to play, instructions and settings&#10;">
       <created>1410539166242</created>
@@ -1768,11 +1766,19 @@
       <created>1410713639014</created>
       <updated>1410713639014</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="&#10;change activity_play">
+      <created>1410714404217</created>
+      <updated>1410714404217</updated>
+    </task>
+    <task id="LOCAL-00006" summary="&#10;change activity_play">
+      <created>1410714691672</created>
+      <updated>1410714691672</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18754000" />
+    <option name="totallyTimeSpent" value="19182000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1320" height="784" extended-state="6" />
@@ -1790,7 +1796,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27760735" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27760735" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32840237" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.327454" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1828,7 +1834,9 @@
     <MESSAGE value="Go from main activity to play, instructions and settings&#10;" />
     <MESSAGE value="Direct activities from one to another. &#10;You can go from main to play, settings and instructions. &#10;You can go from play to easy, from easy you can choose a game" />
     <MESSAGE value="commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit" />
+    <MESSAGE value="&#10;" />
+    <MESSAGE value="&#10;change activity_play" />
+    <option name="LAST_COMMIT_MESSAGE" value="&#10;change activity_play" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
