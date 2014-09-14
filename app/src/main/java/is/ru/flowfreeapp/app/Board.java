@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Board extends View {
@@ -18,6 +19,7 @@ public class Board extends View {
     private Paint m_paintGrid  = new Paint();
     private Paint m_paintPath  = new Paint();
     private Path m_path = new Path();
+
 
     private Cellpath m_cellPath = new Cellpath();
 
@@ -37,11 +39,7 @@ public class Board extends View {
         return row * m_cellHeight + getPaddingTop() ;
     }
 
-    private Canvas mainCanvas = new Canvas();
-
-    public Canvas getMainCanvas() {
-        return mainCanvas;
-    }
+    private ArrayList<dotPath> dotPaths = new ArrayList<dotPath>();
 
     public Board(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -55,6 +53,9 @@ public class Board extends View {
         m_paintPath.setStrokeCap(Paint.Cap.ROUND);
         m_paintPath.setStrokeJoin(Paint.Join.ROUND);
         m_paintPath.setAntiAlias(true);
+
+        dotPaths.add(new dotPath(new Coordinate(4,1), new Coordinate(4,3)));
+        dotPaths.add(new dotPath(new Coordinate(2,1), new Coordinate(2,3)));
     }
 
     @Override
@@ -82,7 +83,9 @@ public class Board extends View {
                 Paint paint = new Paint();
                 paint.setStyle(Paint.Style.FILL);
                 m_rect.set(x, y, x + m_cellWidth, y + m_cellHeight);
-                if(r == 4 && c == 4) {
+
+/*
+                if(r == 1 && c == 2) {
                     canvas.drawRect(m_rect, m_paintGrid);
                     canvas.drawCircle(x - (m_cellWidth/2), y - (m_cellWidth/2), (m_cellWidth/2)*(float)0.8, paint);
                 }
@@ -92,7 +95,9 @@ public class Board extends View {
                 }
                 else {
                     canvas.drawRect(m_rect, m_paintGrid);
-                }
+                }*/
+                canvas.drawRect(m_rect, m_paintGrid);
+
             }
         }
         m_path.reset();
@@ -105,20 +110,38 @@ public class Board extends View {
                 co = colist.get(i);
                 m_path.lineTo(colToX(co.getCol()) + m_cellWidth/2,
                                 rowToY(co.getRow()) + m_cellHeight/2);
-                int x = colToX(co.getCol());
-                int y = rowToY(co.getRow());
-                if((co.getCol() == 1 && co.getRow() == 1) || (co.getCol() == 3 && co.getRow() == 3)) {
+            }
+        }
+
+        Paint circlePaint = new Paint();
+        circlePaint.setStyle(Paint.Style.FILL);
+        for(dotPath dP : dotPaths) {
+            canvas.drawCircle(colToX(dP.getEnd().getCol()) - (m_cellWidth/2),
+                    rowToY(dP.getEnd().getRow()) - (m_cellWidth/2),
+                    (m_cellWidth/2)*(float)0.8, circlePaint
+            );
+            canvas.drawCircle(colToX(dP.getStart().getCol()) - (m_cellWidth/2),
+                    rowToY(dP.getStart().getRow()) - (m_cellWidth/2),
+                    (m_cellWidth/2)*(float)0.8, circlePaint
+            );
+        }
+
+        Rect pathRect = new Rect();
+        for(dotPath dP : dotPaths) {
+            if(dP.getPath() != null) {
+                for (Coordinate coO : dP.getPath()) {
+                    int x = colToX(coO.getCol());
+                    int y = rowToY(coO.getRow());
                     Paint paint = new Paint();
                     paint.setStyle(Paint.Style.FILL);
                     paint.setColor(Color.GREEN);
                     paint.setAlpha(150);
-                    m_rect.set(x, y, x + m_cellWidth, y + m_cellHeight);
-                    canvas.drawRect(m_rect, paint);
+                    pathRect.set(x, y, x + m_cellWidth, y + m_cellHeight);
+                    canvas.drawRect(pathRect, paint);
                 }
             }
         }
         canvas.drawPath(m_path, m_paintPath);
-        mainCanvas = canvas;
     }
 
     private boolean areNeighbours(int c1, int r1, int c2, int r2) {
@@ -140,27 +163,44 @@ public class Board extends View {
             //m_path.reset();
             //m_path.moveTo( colToX(c) + m_cellWidth / 2, rowToY(r) + m_cellHeight / 2 );
             m_cellPath.reset();
-            Coordinate coO = new Coordinate(c,r);
-            m_cellPath.append(coO);
-            int p = colToX(c);
-            int q = rowToY(r);
-            if((c == 2 && r == 2) || (c == 4 && r ==4)) {
-                Paint paint = new Paint();
-                paint.setStyle(Paint.Style.FILL);
-                paint.setColor(Color.GREEN);
-                paint.setAlpha(150);
-                m_rect.set(p, q, p + m_cellWidth, q + m_cellHeight);
-                mainCanvas.drawRect(m_rect, paint);
+            for(dotPath dP : dotPaths){
+                Coordinate coO = new Coordinate(c+1,r+1);
+                Coordinate c2 = new Coordinate(c, r);
+                if(coO.equals(dP.getEnd()) || coO.equals(dP.getStart())) {
+                    m_cellPath.append(c2);
+                }
+
             }
+
         }
         else if (event.getAction() == MotionEvent.ACTION_MOVE) {
             //m_path.lineTo( colToX(c) + m_cellWidth / 2, rowToY(r) + m_cellHeight / 2 );
             if (!m_cellPath.isEmpty()) {
                 List<Coordinate> coordinateList = m_cellPath.getCoordinates();
                 Coordinate last = coordinateList.get(coordinateList.size()-1);
-                if ( areNeighbours(last.getCol(),last.getRow(), c, r)) {
+                if (areNeighbours(last.getCol(),last.getRow(), c, r)) {
                     m_cellPath.append(new Coordinate(c, r));
                     invalidate();
+                }
+            }
+        }
+        else if (event.getAction() == MotionEvent.ACTION_UP) {
+            if(!m_cellPath.isEmpty()) {
+                List<Coordinate> list = m_cellPath.getCoordinates();
+                for(Coordinate co : list) {
+                    for(dotPath dP : dotPaths){
+                        if(dP.getEnd().equals(co) || dP.getStart().equals(co)) {
+                            if(dP.getPath() != null) {
+                                dP.removePath();
+                                invalidate();
+                            }
+                            else {
+                                dP.setPath(list);
+                                invalidate();
+                            }
+                            break;
+                        }
+                    }
                 }
             }
         }
