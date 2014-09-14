@@ -10,7 +10,7 @@
             android:layout_gravity="center_horizontal"
             android:textSize="50dp"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="30dp"/>
+            android:layout_marginBottom="20dp" android:textColor="#ff9b30ff"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -18,7 +18,7 @@
             android:text="Easy"
             android:id="@+id/buttonEasy"
             android:layout_gravity="center_horizontal"
-            android:layout_margin="10dp"
+            android:layout_margin="20dp"
             android:textSize="30dp"
             android:onClick="buttonClick"
             android:clickable="true"/>
