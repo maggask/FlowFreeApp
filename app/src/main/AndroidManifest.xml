@@ -26,6 +26,12 @@
         <activity android:name=".InstructionsActivity"
                   android:label="@string/app_name"/>
 
+        <activity android:name=".EasyActivity"
+                  android:label="@string/app_name"/>
+
+        <activity android:name=".GameActivity"
+                  android:label="@string/app_name"/>
+
     </application>
 
 </manifest>
