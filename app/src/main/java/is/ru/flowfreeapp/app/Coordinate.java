@@ -30,4 +30,12 @@ public class Coordinate {
         Coordinate otherCo = (Coordinate)other;
         return otherCo.getCol() == this.getCol() && otherCo.getRow() == this.getRow();
     }
+
+    @Override
+    public Coordinate clone() {
+        Integer c = new Integer(this.m_col);
+        Integer r = new Integer(this.m_row);
+        Coordinate newCo = new Coordinate(c, r);
+        return newCo;
+    }
 }

@@ -9,7 +9,7 @@ import java.util.List;
 public class dotPath {
     private Coordinate end = null;
     private Coordinate start = null;
-    private List<Coordinate> path = null;
+    private List<Coordinate> path = new ArrayList<Coordinate>();
 
     public dotPath(Coordinate start, Coordinate end) {
         this.end = end;
@@ -32,8 +32,25 @@ public class dotPath {
         return start;
     }
 
-    public void removePath() {
-        this.path = null;
+    public void reset() {
+        if(this.path != null)
+            this.path.clear();
+    }
+
+    public boolean isEmpty() {
+        return path.isEmpty();
+    }
+
+    public void append(Coordinate co) {
+        int idx = path.indexOf(co);
+        if (idx >= 0) {
+            for (int i = path.size() - 1; i > idx; --i) {
+                path.remove(i);
+            }
+        }
+        else {
+            path.add(co);
+        }
     }
 
     @Override

@@ -21,9 +21,9 @@ public class Board extends View {
     private Path m_path = new Path();
     private Path dP_path = new Path();
     private Rect pathRect = new Rect();
-    private dotPath dotP = null;
+    private dotPath m_cellPath = null;
 
-    private Cellpath m_cellPath = new Cellpath();
+    //private Cellpath m_cellPath = new Cellpath();
 
     private int xToCol(int x) {
         return (x - getPaddingLeft()) / m_cellWidth;
@@ -92,15 +92,17 @@ public class Board extends View {
             }
         }
         m_path.reset();
-        if (!m_cellPath.isEmpty()) {
-            List<Coordinate> colist = m_cellPath.getCoordinates();
-            Coordinate co = colist.get(0);
-            m_path.moveTo(colToX(co.getCol()) + m_cellWidth/2,
-                           rowToY(co.getRow()) + m_cellHeight/2);
-            for (int i = 1; i < colist.size(); ++i) {
-                co = colist.get(i);
-                m_path.lineTo(colToX(co.getCol()) + m_cellWidth/2,
-                                rowToY(co.getRow()) + m_cellHeight/2);
+        if(m_cellPath != null) {
+            if (!m_cellPath.isEmpty()) {
+                List<Coordinate> colist = m_cellPath.getPath();
+                Coordinate co = colist.get(0);
+                m_path.moveTo(colToX(co.getCol()) + m_cellWidth / 2,
+                        rowToY(co.getRow()) + m_cellHeight / 2);
+                for (int i = 1; i < colist.size(); ++i) {
+                    co = colist.get(i);
+                    m_path.lineTo(colToX(co.getCol()) + m_cellWidth / 2,
+                            rowToY(co.getRow()) + m_cellHeight / 2);
+                }
             }
         }
 
@@ -120,26 +122,28 @@ public class Board extends View {
         dP_path.reset();
         for(dotPath dP : dotPaths) {
             if(dP.getPath() != null) {
-                Coordinate coTo = dP.getPath().get(0);
-                dP_path.moveTo(colToX(coTo.getCol()) + m_cellWidth/2,
-                        rowToY(coTo.getRow()) + m_cellHeight/2);
-                for (Coordinate coO : dP.getPath()) {
-                    int x = colToX(coO.getCol());
-                    int y = rowToY(coO.getRow());
-                    Paint paint = new Paint();
-                    paint.setStyle(Paint.Style.FILL);
-                    paint.setColor(Color.GREEN);
-                    paint.setAlpha(75);
-                    pathRect.set(x, y, x + m_cellWidth, y + m_cellHeight);
-                    canvas.drawRect(pathRect, paint);
+                if(!dP.getPath().isEmpty()) {
+                    Coordinate coTo = dP.getPath().get(0);
+                    dP_path.moveTo(colToX(coTo.getCol()) + m_cellWidth / 2,
+                            rowToY(coTo.getRow()) + m_cellHeight / 2);
+                    for (Coordinate coO : dP.getPath()) {
+                        int x = colToX(coO.getCol());
+                        int y = rowToY(coO.getRow());
+                        Paint paint = new Paint();
+                        paint.setStyle(Paint.Style.FILL);
+                        paint.setColor(Color.GREEN);
+                        paint.setAlpha(75);
+                        pathRect.set(x, y, x + m_cellWidth, y + m_cellHeight);
+                        canvas.drawRect(pathRect, paint);
 
-                    dP_path.lineTo(colToX(coO.getCol()) + m_cellWidth/2,
-                            rowToY(coO.getRow()) + m_cellHeight/2);
+                        dP_path.lineTo(colToX(coO.getCol()) + m_cellWidth / 2,
+                                rowToY(coO.getRow()) + m_cellHeight / 2);
+                        canvas.drawPath(dP_path, m_paintPath);
 
+                    }
                 }
             }
         }
-        canvas.drawPath(dP_path, m_paintPath);
         canvas.drawPath(m_path, m_paintPath);
     }
 
@@ -159,12 +163,11 @@ public class Board extends View {
         }
 
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            m_cellPath.reset();
             for(dotPath dP : dotPaths){
                 Coordinate c2 = new Coordinate(c, r);
                 if(c2.equals(dP.getEnd()) || c2.equals(dP.getStart())) {
-                    dotP = dP;
-                    dP.removePath();
+                    m_cellPath = dP;
+                    dP.reset();
                     m_cellPath.append(c2);
                 }
 
@@ -173,18 +176,34 @@ public class Board extends View {
         }
         else if (event.getAction() == MotionEvent.ACTION_MOVE) {
             if (!m_cellPath.isEmpty()) {
-                List<Coordinate> coordinateList = m_cellPath.getCoordinates();
+                List<Coordinate> coordinateList = m_cellPath.getPath();
                 Coordinate last = coordinateList.get(coordinateList.size()-1);
+                Coordinate secondToLast = null;
+                if(coordinateList.size() >= 2) {
+                    secondToLast = coordinateList.get(coordinateList.size() - 2);
+                }
                 if (areNeighbours(last.getCol(),last.getRow(), c, r)) {
                     Coordinate newCo = new Coordinate(c, r);
                     boolean addToPath = true;
-                    if(coordinateList.contains(dotP.getStart()) && coordinateList.contains(dotP.getEnd())){
-                        addToPath = false;
+                    if (!newCo.equals(secondToLast)) {
+                        if (coordinateList.contains(m_cellPath.getStart()) && coordinateList.contains(m_cellPath.getEnd())) {
+                            addToPath = false;
+                        }
                     }
                     for(dotPath dP : dotPaths) {
-                        if(!dP.equals(dotP) && (dP.getStart().equals(newCo) || dP.getEnd().equals(newCo))) {
-                            addToPath = false;
-                            break;
+                        if(secondToLast != null) {
+                            if (!newCo.equals(secondToLast)) {
+                                if (!dP.equals(m_cellPath) && (dP.getStart().equals(newCo) || dP.getEnd().equals(newCo))) {
+                                    addToPath = false;
+                                    break;
+                                }
+                            }
+                        }
+                        else {
+                            if (!dP.equals(m_cellPath) && (dP.getStart().equals(newCo) || dP.getEnd().equals(newCo))) {
+                                addToPath = false;
+                                break;
+                            }
                         }
                     }
                     if(addToPath) {
@@ -196,14 +215,18 @@ public class Board extends View {
         }
         else if (event.getAction() == MotionEvent.ACTION_UP) {
             if(!m_cellPath.isEmpty()) {
-                List<Coordinate> list = m_cellPath.getCoordinates();
+                List<Coordinate> list = m_cellPath.getPath();
                 for(dotPath dP : dotPaths) {
-                    if(dotP.equals(dP)){
-                        dP.setPath(list);
+                    if(m_cellPath.equals(dP)){
+                        List<Coordinate> newList = new ArrayList<Coordinate>();
+                        for(Coordinate co : list){
+                            newList.add(co.clone());
+                        }
+                        dP.setPath(newList);
                         break;
                     }
                 }
-                dotP.setPath(list);
+                m_cellPath.setPath(list);
                 invalidate();
             }
         }
