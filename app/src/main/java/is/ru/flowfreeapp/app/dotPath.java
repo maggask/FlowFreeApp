@@ -1,5 +1,7 @@
 package is.ru.flowfreeapp.app;
 
+import android.graphics.Color;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,10 +12,12 @@ public class dotPath {
     private Coordinate end = null;
     private Coordinate start = null;
     private List<Coordinate> path = new ArrayList<Coordinate>();
+    private int pointColor;
 
-    public dotPath(Coordinate start, Coordinate end) {
+    public dotPath(Coordinate start, Coordinate end, int color) {
         this.end = end;
         this.start = start;
+        this.pointColor = color;
     }
 
     public void setPath(List<Coordinate> path) {
@@ -27,6 +31,8 @@ public class dotPath {
     public Coordinate getEnd() {
         return end;
     }
+
+    public int getPathColor() { return pointColor; }
 
     public Coordinate getStart() {
         return start;

@@ -56,9 +56,9 @@ public class Board extends View {
         m_paintPath.setStrokeJoin(Paint.Join.ROUND);
         m_paintPath.setAntiAlias(true);
 
-        dotPaths.add(new dotPath(new Coordinate(0, 0), new Coordinate(0, 3)));
-        dotPaths.add(new dotPath(new Coordinate(2, 0), new Coordinate(2, 3)));
-        dotPaths.add(new dotPath(new Coordinate(4, 1), new Coordinate(4, 4)));
+        dotPaths.add(new dotPath(new Coordinate(0, 0), new Coordinate(0, 3), Color.GREEN));
+        dotPaths.add(new dotPath(new Coordinate(2, 0), new Coordinate(2, 3), Color.BLACK));
+        dotPaths.add(new dotPath(new Coordinate(4, 1), new Coordinate(4, 4), Color.BLUE));
     }
 
     @Override
@@ -106,9 +106,11 @@ public class Board extends View {
             }
         }
 
-        Paint circlePaint = new Paint();
-        circlePaint.setStyle(Paint.Style.FILL);
+
         for(dotPath dP : dotPaths) {
+            Paint circlePaint = new Paint();
+            circlePaint.setStyle(Paint.Style.FILL);
+            circlePaint.setColor(dP.getPathColor());
             canvas.drawCircle(colToX(dP.getEnd().getCol()) + (m_cellWidth/2),
                     rowToY(dP.getEnd().getRow()) + (m_cellWidth/2),
                     (m_cellWidth/2)*(float)0.8, circlePaint
