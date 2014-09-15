@@ -35,4 +35,13 @@ public class dotPath {
     public void removePath() {
         this.path = null;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (!(other instanceof dotPath)) {
+            return false;
+        }
+        dotPath dP = (dotPath)other;
+        return this.getStart().equals(dP.getStart());
+    }
 }

@@ -19,7 +19,9 @@ public class Board extends View {
     private Paint m_paintGrid  = new Paint();
     private Paint m_paintPath  = new Paint();
     private Path m_path = new Path();
-
+    private Path dP_path = new Path();
+    private Rect pathRect = new Rect();
+    private dotPath dotP = null;
 
     private Cellpath m_cellPath = new Cellpath();
 
@@ -54,8 +56,9 @@ public class Board extends View {
         m_paintPath.setStrokeJoin(Paint.Join.ROUND);
         m_paintPath.setAntiAlias(true);
 
-        dotPaths.add(new dotPath(new Coordinate(4,1), new Coordinate(4,3)));
-        dotPaths.add(new dotPath(new Coordinate(2,1), new Coordinate(2,3)));
+        dotPaths.add(new dotPath(new Coordinate(0, 0), new Coordinate(0, 3)));
+        dotPaths.add(new dotPath(new Coordinate(2, 0), new Coordinate(2, 3)));
+        dotPaths.add(new dotPath(new Coordinate(4, 1), new Coordinate(4, 4)));
     }
 
     @Override
@@ -84,18 +87,6 @@ public class Board extends View {
                 paint.setStyle(Paint.Style.FILL);
                 m_rect.set(x, y, x + m_cellWidth, y + m_cellHeight);
 
-/*
-                if(r == 1 && c == 2) {
-                    canvas.drawRect(m_rect, m_paintGrid);
-                    canvas.drawCircle(x - (m_cellWidth/2), y - (m_cellWidth/2), (m_cellWidth/2)*(float)0.8, paint);
-                }
-                else if(r == 2 && c == 2) {
-                    canvas.drawRect(m_rect, m_paintGrid);
-                    canvas.drawCircle(x - (m_cellWidth/2), y - (m_cellWidth/2), (m_cellWidth/2)*(float)0.8, paint);
-                }
-                else {
-                    canvas.drawRect(m_rect, m_paintGrid);
-                }*/
                 canvas.drawRect(m_rect, m_paintGrid);
 
             }
@@ -116,31 +107,39 @@ public class Board extends View {
         Paint circlePaint = new Paint();
         circlePaint.setStyle(Paint.Style.FILL);
         for(dotPath dP : dotPaths) {
-            canvas.drawCircle(colToX(dP.getEnd().getCol()) - (m_cellWidth/2),
-                    rowToY(dP.getEnd().getRow()) - (m_cellWidth/2),
+            canvas.drawCircle(colToX(dP.getEnd().getCol()) + (m_cellWidth/2),
+                    rowToY(dP.getEnd().getRow()) + (m_cellWidth/2),
                     (m_cellWidth/2)*(float)0.8, circlePaint
             );
-            canvas.drawCircle(colToX(dP.getStart().getCol()) - (m_cellWidth/2),
-                    rowToY(dP.getStart().getRow()) - (m_cellWidth/2),
+            canvas.drawCircle(colToX(dP.getStart().getCol()) + (m_cellWidth/2),
+                    rowToY(dP.getStart().getRow()) + (m_cellWidth/2),
                     (m_cellWidth/2)*(float)0.8, circlePaint
             );
         }
 
-        Rect pathRect = new Rect();
+        dP_path.reset();
         for(dotPath dP : dotPaths) {
             if(dP.getPath() != null) {
+                Coordinate coTo = dP.getPath().get(0);
+                dP_path.moveTo(colToX(coTo.getCol()) + m_cellWidth/2,
+                        rowToY(coTo.getRow()) + m_cellHeight/2);
                 for (Coordinate coO : dP.getPath()) {
                     int x = colToX(coO.getCol());
                     int y = rowToY(coO.getRow());
                     Paint paint = new Paint();
                     paint.setStyle(Paint.Style.FILL);
                     paint.setColor(Color.GREEN);
-                    paint.setAlpha(150);
+                    paint.setAlpha(75);
                     pathRect.set(x, y, x + m_cellWidth, y + m_cellHeight);
                     canvas.drawRect(pathRect, paint);
+
+                    dP_path.lineTo(colToX(coO.getCol()) + m_cellWidth/2,
+                            rowToY(coO.getRow()) + m_cellHeight/2);
+
                 }
             }
         }
+        canvas.drawPath(dP_path, m_paintPath);
         canvas.drawPath(m_path, m_paintPath);
     }
 
@@ -160,13 +159,12 @@ public class Board extends View {
         }
 
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            //m_path.reset();
-            //m_path.moveTo( colToX(c) + m_cellWidth / 2, rowToY(r) + m_cellHeight / 2 );
             m_cellPath.reset();
             for(dotPath dP : dotPaths){
-                Coordinate coO = new Coordinate(c+1,r+1);
                 Coordinate c2 = new Coordinate(c, r);
-                if(coO.equals(dP.getEnd()) || coO.equals(dP.getStart())) {
+                if(c2.equals(dP.getEnd()) || c2.equals(dP.getStart())) {
+                    dotP = dP;
+                    dP.removePath();
                     m_cellPath.append(c2);
                 }
 
@@ -174,34 +172,36 @@ public class Board extends View {
 
         }
         else if (event.getAction() == MotionEvent.ACTION_MOVE) {
-            //m_path.lineTo( colToX(c) + m_cellWidth / 2, rowToY(r) + m_cellHeight / 2 );
             if (!m_cellPath.isEmpty()) {
                 List<Coordinate> coordinateList = m_cellPath.getCoordinates();
                 Coordinate last = coordinateList.get(coordinateList.size()-1);
                 if (areNeighbours(last.getCol(),last.getRow(), c, r)) {
-                    m_cellPath.append(new Coordinate(c, r));
-                    invalidate();
+                    Coordinate newCo = new Coordinate(c, r);
+                    boolean addToPath = true;
+                    for(dotPath dP : dotPaths) {
+                        if(!dP.equals(dotP) && (dP.getStart().equals(newCo) || dP.getEnd().equals(newCo))) {
+                            addToPath = false;
+                            break;
+                        }
+                    }
+                    if(addToPath) {
+                        m_cellPath.append(newCo);
+                        invalidate();
+                    }
                 }
             }
         }
         else if (event.getAction() == MotionEvent.ACTION_UP) {
             if(!m_cellPath.isEmpty()) {
                 List<Coordinate> list = m_cellPath.getCoordinates();
-                for(Coordinate co : list) {
-                    for(dotPath dP : dotPaths){
-                        if(dP.getEnd().equals(co) || dP.getStart().equals(co)) {
-                            if(dP.getPath() != null) {
-                                dP.removePath();
-                                invalidate();
-                            }
-                            else {
-                                dP.setPath(list);
-                                invalidate();
-                            }
-                            break;
-                        }
+                for(dotPath dP : dotPaths) {
+                    if(dotP.equals(dP)){
+                        dP.setPath(list);
+                        break;
                     }
                 }
+                dotP.setPath(list);
+                invalidate();
             }
         }
         return true;
