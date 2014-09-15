@@ -178,6 +178,9 @@ public class Board extends View {
                 if (areNeighbours(last.getCol(),last.getRow(), c, r)) {
                     Coordinate newCo = new Coordinate(c, r);
                     boolean addToPath = true;
+                    if(coordinateList.contains(dotP.getStart()) && coordinateList.contains(dotP.getEnd())){
+                        addToPath = false;
+                    }
                     for(dotPath dP : dotPaths) {
                         if(!dP.equals(dotP) && (dP.getStart().equals(newCo) || dP.getEnd().equals(newCo))) {
                             addToPath = false;
