@@ -39,7 +39,7 @@ public class dotPath {
     }
 
     public void reset() {
-        if(this.path != null)
+        if (this.path != null)
             this.path.clear();
     }
 
