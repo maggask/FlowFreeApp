@@ -12,25 +12,39 @@
             android:id="@+id/textView"
             android:layout_gravity="center_horizontal"
             android:textSize="50dp"
-            android:layout_marginTop="20dp" android:layout_marginBottom="20dp" android:textColor="#ff9b30ff"/>
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:textColor="#ff9b30ff"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Drag to connect matching colors with pipe, creating a flow."
-            android:id="@+id/textView2" android:layout_gravity="center_horizontal" android:textSize="25dp"
-            android:gravity="center" android:layout_marginLeft="10dp" android:layout_marginRight="10dp"
+            android:id="@+id/textView2"
+            android:layout_gravity="center_horizontal"
+            android:textSize="25dp"
+            android:gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_marginBottom="30dp"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Pair all colors, and cover the entire board with pipe to solve each puzzle."
-            android:id="@+id/textView3" android:layout_gravity="center_horizontal" android:gravity="center"
-            android:textSize="25dp" android:layout_marginLeft="10dp" android:layout_marginRight="10dp"
+            android:id="@+id/textView3"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:textSize="25dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_marginBottom="30dp"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="But watch out, pipes will break if they cross or overlap!"
-            android:id="@+id/textView4" android:layout_gravity="center_horizontal" android:gravity="center"
-            android:textSize="25dp" android:layout_marginLeft="10dp" android:layout_marginRight="10dp"/>
+            android:id="@+id/textView4"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:textSize="25dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
 </LinearLayout>

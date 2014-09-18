@@ -11,7 +11,9 @@
         android:layout_gravity="center_horizontal"
         android:textSize="50dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" android:layout_marginTop="20dp" android:layout_marginBottom="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:textColor="#ff9b30ff"/>
 <ImageButton
         android:layout_width="wrap_content"
@@ -35,7 +37,9 @@
         android:layout_toRightOf="@+id/game1"
         android:layout_marginLeft="58dp"
         android:onClick="buttonClick"
-        android:clickable="true" android:layout_marginTop="0dp" android:layout_marginBottom="20dp"/>
+        android:clickable="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="20dp"/>
 <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -45,7 +49,8 @@
         android:layout_alignStart="@+id/game1"
         android:layout_below="@+id/game1"
         android:onClick="buttonClick"
-        android:clickable="true" android:layout_marginTop="20dp"/>
+        android:clickable="true"
+        android:layout_marginTop="20dp"/>
 <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -55,5 +60,6 @@
         android:layout_alignLeft="@+id/game2"
         android:layout_alignStart="@+id/game2"
         android:onClick="buttonClick"
-        android:clickable="true" android:layout_marginTop="0dp"/>
+        android:clickable="true"
+        android:layout_marginTop="0dp"/>
 </RelativeLayout>
