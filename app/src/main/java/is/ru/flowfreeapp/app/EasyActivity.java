@@ -21,7 +21,7 @@ public class EasyActivity extends Activity {
         setContentView(R.layout.activity_easy);
     }
 
-    public void buttonClick( View view ) {
+    public void buttonClick(View view) {
         Sound s = new Sound();
         s.playSound(this);
         ImageButton button = (ImageButton) view;

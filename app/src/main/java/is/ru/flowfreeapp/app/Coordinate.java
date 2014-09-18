@@ -23,7 +23,7 @@ public class Coordinate {
     }
 
     @Override
-    public boolean equals( Object other ) {
+    public boolean equals(Object other) {
         if (!(other instanceof Coordinate)) {
             return false;
         }

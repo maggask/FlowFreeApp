@@ -29,14 +29,8 @@ public class PlayActivity extends Activity {
         Sound s = new Sound();
         s.playSound(this);
         TextView button = (TextView) view;
-        //ImageView backButton = (ImageView) view;
-
-        //int backId = backButton.getId();
         int id = button.getId();
 
-        /*if (backId == R.id.backButton) {
-            startActivity(new Intent(this, MainActivity.class));
-        }*/
         if (id == R.id.buttonEasy) {
             startActivity(new Intent(this, EasyActivity.class));
         }
