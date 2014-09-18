@@ -22,6 +22,8 @@ public class EasyActivity extends Activity {
     }
 
     public void buttonClick( View view ) {
+        Sound s = new Sound();
+        s.playSound(this);
         ImageButton button = (ImageButton) view;
         int id = button.getId();
         if (id == R.id.game1) {
@@ -39,6 +41,8 @@ public class EasyActivity extends Activity {
     }
 
     public void backClick(View view) {
+        Sound s = new Sound();
+        s.playSound(this);
         ImageView backButton = (ImageView) view;
         int backId = backButton.getId();
 

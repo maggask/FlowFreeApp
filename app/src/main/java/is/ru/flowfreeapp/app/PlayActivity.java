@@ -26,6 +26,8 @@ public class PlayActivity extends Activity {
     }
 
     public void buttonClick(View view) {
+        Sound s = new Sound();
+        s.playSound(this);
         TextView button = (TextView) view;
         //ImageView backButton = (ImageView) view;
 
@@ -47,6 +49,8 @@ public class PlayActivity extends Activity {
     }
 
     public void backClick(View view) {
+        Sound s = new Sound();
+        s.playSound(this);
         ImageView backButton = (ImageView) view;
         int backId = backButton.getId();
 

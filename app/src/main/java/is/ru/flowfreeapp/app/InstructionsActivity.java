@@ -21,6 +21,8 @@ public class InstructionsActivity extends Activity {
     }
 
     public void backClick(View view) {
+        Sound s = new Sound();
+        s.playSound(this);
         ImageView backButton = (ImageView) view;
         int backId = backButton.getId();
 
