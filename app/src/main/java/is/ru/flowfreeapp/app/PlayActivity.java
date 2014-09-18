@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -24,11 +25,18 @@ public class PlayActivity extends Activity {
         board.setColor( color ); */
     }
 
-    public void buttonClick( View view ) {
+    public void buttonClick(View view) {
         TextView button = (TextView) view;
+        //ImageView backButton = (ImageView) view;
+
+        //int backId = backButton.getId();
         int id = button.getId();
-        if ( id == R.id.buttonEasy ) {
-            startActivity( new Intent( this, EasyActivity.class ) );
+
+        /*if (backId == R.id.backButton) {
+            startActivity(new Intent(this, MainActivity.class));
+        }*/
+        if (id == R.id.buttonEasy) {
+            startActivity(new Intent(this, EasyActivity.class));
         }
         /*else if ( id == R.id.buttonMedium ) {
             startActivity( new Intent( this, MediumActivity.class ) );
@@ -36,5 +44,14 @@ public class PlayActivity extends Activity {
         else if ( id == R.id.buttonHard) {
             startActivity( new Intent( this, HardActivity.class ) );
         }*/
+    }
+
+    public void backClick(View view) {
+        ImageView backButton = (ImageView) view;
+        int backId = backButton.getId();
+
+        if (backId == R.id.backButton) {
+            startActivity(new Intent(this, MainActivity.class));
+        }
     }
 }
