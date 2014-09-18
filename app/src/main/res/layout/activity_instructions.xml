@@ -5,16 +5,23 @@
               android:layout_height="fill_parent"
               android:weightSum="1">
 
+    <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:id="@+id/backButton"
+            android:src="@drawable/backbutton"
+            android:padding="5dp" android:clickable="true" android:onClick="backClick"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Instructions"
             android:id="@+id/textView"
-            android:layout_gravity="center_horizontal"
             android:textSize="50dp"
-            android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:textColor="#ff9b30ff"/>
+            android:textColor="#ff9b30ff"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal"
+            />
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

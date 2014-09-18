@@ -5,6 +5,15 @@
               android:layout_height="fill_parent"
         >
 
+    <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:id="@+id/backButton"
+            android:src="@drawable/backbutton"
+            android:layout_gravity="left"
+            android:clickable="true"
+            android:onClick="backClick"
+            android:padding="5dp"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

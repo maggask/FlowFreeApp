@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -34,6 +35,15 @@ public class EasyActivity extends Activity {
         }
         if (id == R.id.game4) {
             startActivity(new Intent(this, GameActivity.class));
+        }
+    }
+
+    public void backClick(View view) {
+        ImageView backButton = (ImageView) view;
+        int backId = backButton.getId();
+
+        if (backId == R.id.backButton) {
+            startActivity(new Intent(this, PlayActivity.class));
         }
     }
 }
