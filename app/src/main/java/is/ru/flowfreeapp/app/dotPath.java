@@ -13,6 +13,7 @@ public class dotPath {
     private Coordinate start = null;
     private List<Coordinate> path = new ArrayList<Coordinate>();
     private int pointColor;
+    private boolean isConnected = false;
 
     public dotPath(Coordinate start, Coordinate end, int color) {
         this.end = end;
@@ -37,6 +38,10 @@ public class dotPath {
     public Coordinate getStart() {
         return start;
     }
+
+    public void setConnected(boolean connected) { this.isConnected = connected; }
+
+    public boolean getConnected() { return this.isConnected; }
 
     public void reset() {
         if (this.path != null)

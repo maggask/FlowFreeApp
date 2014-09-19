@@ -3,10 +3,12 @@ package is.ru.flowfreeapp.app;
 import android.content.Context;
 import android.graphics.*;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Board extends View {
@@ -23,7 +25,7 @@ public class Board extends View {
     private Rect pathRect = new Rect();
     private dotPath m_cellPath = null;
 
-    //private Cellpath m_cellPath = new Cellpath();
+    private boolean[][] board = new boolean[NUM_CELLS][NUM_CELLS];
 
     private int xToCol(int x) {
         return (x - getPaddingLeft()) / m_cellWidth;
@@ -125,6 +127,9 @@ public class Board extends View {
         }
 
         dP_path.reset();
+        for(int i = 0; i < board[0].length; i++) {
+            Arrays.fill(board[i], false);
+        }
         for (dotPath dP : dotPaths) {
             if (dP.getPath() != null) {
                 if (!dP.getPath().isEmpty()) {
@@ -145,6 +150,8 @@ public class Board extends View {
                                 rowToY(coO.getRow()) + m_cellHeight / 2);
                         canvas.drawPath(dP_path, m_paintPath);
 
+                        board[coO.getCol()][coO.getRow()] = true;
+
                     }
                 }
             }
@@ -162,6 +169,7 @@ public class Board extends View {
         int y = (int)event.getY();
         int c = xToCol(x);
         int r = yToRow(y);
+        boolean isVictory = true;
 
         if (c >= NUM_CELLS || r >= NUM_CELLS) {
             return true;
@@ -196,6 +204,7 @@ public class Board extends View {
                     Coordinate newCo = new Coordinate(c, r);
                     boolean addToPath = true;
 
+                    // Checks if the dots are now connected and if you are going beyond the connection
                     if (!newCo.equals(secondToLast)) {
                         if (coordinateList.contains(m_cellPath.getStart()) && coordinateList.contains(m_cellPath.getEnd())) {
                             addToPath = false;
@@ -207,12 +216,14 @@ public class Board extends View {
                             if (!newCo.equals(secondToLast)) {
                                 if (!dP.equals(m_cellPath) && (dP.getStart().equals(newCo) || dP.getEnd().equals(newCo))) {
                                     addToPath = false;
+                                    dP.setConnected(true);
                                     break;
                                 }
                             }
                         }
                         else {
                             if (!dP.equals(m_cellPath) && (dP.getStart().equals(newCo) || dP.getEnd().equals(newCo))) {
+                                dP.setConnected(true);
                                 addToPath = false;
                                 break;
                             }
@@ -231,6 +242,8 @@ public class Board extends View {
                 List<Coordinate> list = m_cellPath.getPath();
 
                 for(dotPath dP : dotPaths) {
+                    if(list.contains(m_cellPath.getStart()) && list.contains(m_cellPath.getEnd()))
+                        dP.setConnected(true);
                     if (m_cellPath.equals(dP)){
                         List<Coordinate> newList = new ArrayList<Coordinate>();
 
@@ -241,11 +254,21 @@ public class Board extends View {
                         break;
                     }
                 }
+                for(dotPath dP : dotPaths) {
+                    if(!dP.getConnected())
+                        isVictory = false;
+                }
                 m_cellPath.setPath(list);
                 invalidate();
+                if(isVictory)
+                    winningFunction();
             }
         }
         return true;
+    }
+
+    private void winningFunction() {
+        Log.d("Winning", "Just won");
     }
 
     public void setColor(int color) {
