@@ -136,7 +136,7 @@ public class Board extends View {
                         int y = rowToY(coO.getRow());
                         Paint paint = new Paint();
                         paint.setStyle(Paint.Style.FILL);
-                        paint.setColor(Color.GREEN);
+                        paint.setColor(dP.getPathColor());
                         paint.setAlpha(75);
                         pathRect.set(x, y, x + m_cellWidth, y + m_cellHeight);
                         canvas.drawRect(pathRect, paint);
