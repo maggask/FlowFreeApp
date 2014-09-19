@@ -32,6 +32,10 @@ public class MainActivity extends Activity {
             List<Pack> packs = new ArrayList<Pack>();
             readPack(getAssets().open("packs/packs.xml"), packs);
             mGlobals.mPacks = packs;
+
+            List<Puzzle> puzzles = new ArrayList<Puzzle>();
+            readEasy(getAssets().open("packs/easy.xml"), puzzles);
+            mGlobals.mPuzzles = puzzles;
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -54,6 +58,29 @@ public class MainActivity extends Activity {
                     String description = eNode.getElementsByTagName("description").item(0).getFirstChild().getNodeValue();
                     String file = eNode.getElementsByTagName("file").item(0).getFirstChild().getNodeValue();
                     packs.add(new Pack(name, description, file));
+                }
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void readEasy(InputStream is, List<Puzzle> puzzles) {
+        try {
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(is);
+            NodeList nList = doc.getElementsByTagName("puzzle");
+
+            for (int c = 0; c < nList.getLength(); ++c) {
+                Node nNode = nList.item(c);
+
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element eNode = (Element) nNode;
+                    String size = eNode.getElementsByTagName("size").item(0).getFirstChild().getNodeValue();
+                    String flow = eNode.getElementsByTagName("flow").item(0).getFirstChild().getNodeValue();
+                    puzzles.add(new Puzzle(size, flow));
                 }
             }
         }

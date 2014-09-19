@@ -1,5 +1,7 @@
 package is.ru.flowfreeapp.app;
 
+import java.util.List;
+
 /**
  * Created by margretskristjansdottir on 19.9.14.
  */
@@ -8,7 +10,7 @@ public class Pack {
     private String mDescription;
     private String mFile;
 
-    Pack( String name, String description, String file )  {
+    Pack(String name, String description, String file)  {
         mName = name;
         mDescription = description;
         mFile = file;

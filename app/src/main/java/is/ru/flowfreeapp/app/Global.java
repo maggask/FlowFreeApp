@@ -8,6 +8,7 @@ import java.util.List;
 public class Global {
 
     public List<Pack> mPacks;
+    public List<Puzzle> mPuzzles;
 
     private static Global mInstance = new Global();
 
