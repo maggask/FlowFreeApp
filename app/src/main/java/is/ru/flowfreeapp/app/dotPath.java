@@ -78,7 +78,7 @@ public class dotPath {
         return this.path.contains(coordinate);
     }
 
-    public  void clearFromCoordinate(Coordinate coordinate) {
+    public  void clearFromPath(Coordinate coordinate) {
         int j = this.path.indexOf(coordinate);
         if(j >= 0) {
             int size = this.path.size();

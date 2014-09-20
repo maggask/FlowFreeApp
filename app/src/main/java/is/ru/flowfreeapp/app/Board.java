@@ -36,11 +36,11 @@ public class Board extends View {
     }
 
     private int colToX(int col) {
-        return col * m_cellWidth + getPaddingLeft() ;
+        return col * m_cellWidth + getPaddingLeft();
     }
 
     private int rowToY(int row) {
-        return row * m_cellHeight + getPaddingTop() ;
+        return row * m_cellHeight + getPaddingTop();
     }
 
     private ArrayList<dotPath> dotPaths = new ArrayList<dotPath>();
@@ -58,9 +58,12 @@ public class Board extends View {
         m_paintPath.setStrokeJoin(Paint.Join.ROUND);
         m_paintPath.setAntiAlias(true);
 
-        dotPaths.add(new dotPath(new Coordinate(0, 0), new Coordinate(0, 3), Color.GREEN));
-        dotPaths.add(new dotPath(new Coordinate(2, 0), new Coordinate(2, 3), Color.BLACK));
-        dotPaths.add(new dotPath(new Coordinate(4, 1), new Coordinate(4, 4), Color.BLUE));
+        dotPaths.add(new dotPath(new Coordinate(0, 0), new Coordinate(1, 4), Color.GREEN));
+        dotPaths.add(new dotPath(new Coordinate(2, 0), new Coordinate(1, 3), Color.BLACK));
+        //dotPaths.add(new dotPath(new Coordinate(2, 1), new Coordinate(2, 4), Color.BLUE));
+        dotPaths.add(new dotPath(new Coordinate(4, 0), new Coordinate(3, 3), Color.WHITE));
+        dotPaths.add(new dotPath(new Coordinate(4, 1), new Coordinate(3, 4), Color.RED));
+
     }
 
     @Override
@@ -229,7 +232,7 @@ public class Board extends View {
                             }
                         }
                         if(!dP.equals(m_cellPath) && dP.crossesPath(last)) {
-                            dP.clearFromCoordinate(last);
+                            dP.clearFromPath(last);
                         }
                     }
 
@@ -263,8 +266,16 @@ public class Board extends View {
                 }
                 m_cellPath.setPath(list);
                 invalidate();
-                if(isVictory)
-                    winningFunction();
+                if(isVictory) {
+                    for(int i = 0; i < NUM_CELLS; i++) {
+                        for(int j = 0; j < NUM_CELLS; j++) {
+                            if(!board[i][j])
+                                isVictory = false;
+                        }
+                    }
+                    if(isVictory)
+                        winningFunction();
+                }
             }
         }
         return true;
