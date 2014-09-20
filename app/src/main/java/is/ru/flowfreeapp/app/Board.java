@@ -228,6 +228,9 @@ public class Board extends View {
                                 break;
                             }
                         }
+                        if(!dP.equals(m_cellPath) && dP.crossesPath(last)) {
+                            dP.clearFromCoordinate(last);
+                        }
                     }
 
                     if (addToPath) {
