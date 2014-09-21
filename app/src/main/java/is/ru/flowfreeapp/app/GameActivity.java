@@ -13,6 +13,7 @@ import android.widget.ImageView;
   */
 
 public class GameActivity extends Activity {
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,7 +23,7 @@ public class GameActivity extends Activity {
     public void backClick(View view) {
         Sound s = new Sound();
         s.playSound(this);
-        ImageView backButton = (ImageView) view;
+        ImageView backButton = (ImageView)view;
         int backId = backButton.getId();
 
         if (backId == R.id.backButton) {
