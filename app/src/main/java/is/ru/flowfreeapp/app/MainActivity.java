@@ -33,9 +33,17 @@ public class MainActivity extends Activity {
             readPack(getAssets().open("packs/packs.xml"), packs);
             mGlobals.mPacks = packs;
 
-            List<Puzzle> puzzles = new ArrayList<Puzzle>();
-            readEasy(getAssets().open("packs/easy.xml"), puzzles);
-            mGlobals.mPuzzles = puzzles;
+            List<Puzzle> puzzleEasy = new ArrayList<Puzzle>();
+            readEasy(getAssets().open("packs/easy.xml"), puzzleEasy);
+            mGlobals.mPuzzleEasy = puzzleEasy;
+
+            List<Puzzle> puzzleMedium = new ArrayList<Puzzle>();
+            readMedium(getAssets().open("packs/medium.xml"), puzzleMedium);
+            mGlobals.mPuzzleMedium = puzzleMedium;
+
+            List<Puzzle> puzzleHard = new ArrayList<Puzzle>();
+            readHard(getAssets().open("packs/hard.xml"), puzzleHard);
+            mGlobals.mPuzzleHard = puzzleHard;
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -67,6 +75,52 @@ public class MainActivity extends Activity {
     }
 
     private void readEasy(InputStream is, List<Puzzle> puzzles) {
+        try {
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(is);
+            NodeList nList = doc.getElementsByTagName("puzzle");
+
+            for (int c = 0; c < nList.getLength(); ++c) {
+                Node nNode = nList.item(c);
+
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element eNode = (Element) nNode;
+                    String size = eNode.getElementsByTagName("size").item(0).getFirstChild().getNodeValue();
+                    String flow = eNode.getElementsByTagName("flow").item(0).getFirstChild().getNodeValue();
+                    puzzles.add(new Puzzle(size, flow));
+                }
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void readMedium(InputStream is, List<Puzzle> puzzles) {
+        try {
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(is);
+            NodeList nList = doc.getElementsByTagName("puzzle");
+
+            for (int c = 0; c < nList.getLength(); ++c) {
+                Node nNode = nList.item(c);
+
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element eNode = (Element) nNode;
+                    String size = eNode.getElementsByTagName("size").item(0).getFirstChild().getNodeValue();
+                    String flow = eNode.getElementsByTagName("flow").item(0).getFirstChild().getNodeValue();
+                    puzzles.add(new Puzzle(size, flow));
+                }
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void readHard(InputStream is, List<Puzzle> puzzles) {
         try {
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
