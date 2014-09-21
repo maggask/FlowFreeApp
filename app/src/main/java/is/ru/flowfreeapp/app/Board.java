@@ -27,6 +27,10 @@ public class Board extends View {
 
     private boolean[][] board = new boolean[NUM_CELLS][NUM_CELLS];
 
+    private int totalMoves = 0;
+
+    private int totalConnections = 0;
+
     private int xToCol(int x) {
         return (x - getPaddingLeft()) / m_cellWidth;
     }
@@ -60,7 +64,7 @@ public class Board extends View {
 
         dotPaths.add(new dotPath(new Coordinate(0, 0), new Coordinate(1, 4), Color.GREEN));
         dotPaths.add(new dotPath(new Coordinate(2, 0), new Coordinate(1, 3), Color.BLACK));
-        //dotPaths.add(new dotPath(new Coordinate(2, 1), new Coordinate(2, 4), Color.BLUE));
+        dotPaths.add(new dotPath(new Coordinate(2, 1), new Coordinate(2, 4), Color.BLUE));
         dotPaths.add(new dotPath(new Coordinate(4, 0), new Coordinate(3, 3), Color.WHITE));
         dotPaths.add(new dotPath(new Coordinate(4, 1), new Coordinate(3, 4), Color.RED));
 
@@ -213,7 +217,6 @@ public class Board extends View {
                             addToPath = false;
                         }
                     }
-
                     for (dotPath dP : dotPaths) {
                         if (secondToLast != null) {
                             if (!newCo.equals(secondToLast)) {
@@ -246,10 +249,13 @@ public class Board extends View {
         else if (event.getAction() == MotionEvent.ACTION_UP) {
             if (!m_cellPath.isEmpty()) {
                 List<Coordinate> list = m_cellPath.getPath();
-
+                totalMoves++;
+                totalConnections = 0;
                 for(dotPath dP : dotPaths) {
-                    if(list.contains(m_cellPath.getStart()) && list.contains(m_cellPath.getEnd()))
+                    List<Coordinate> dPList = dP.getPath();
+                    if(dPList.contains(m_cellPath.getStart()) && dPList.contains(m_cellPath.getEnd())) {
                         dP.setConnected(true);
+                    }
                     if (m_cellPath.equals(dP)){
                         List<Coordinate> newList = new ArrayList<Coordinate>();
 
