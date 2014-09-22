@@ -17,9 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends Activity {
-    /**
-     * Called when the activity is first created.
-     */
 
     private Global mGlobals = Global.getInstance();
 

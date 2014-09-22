@@ -17,18 +17,12 @@ public class PlayActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
-
-    /*    SharedPreferences settings = getSharedPreferences( "ColorPref", MODE_PRIVATE );
-
-        int color = settings.getInt( "pathColor", Color.CYAN );
-        Board board = (Board) findViewById( R.id.board );
-        board.setColor( color ); */
     }
 
     public void buttonClick(View view) {
         Sound s = new Sound();
         s.playSound(this);
-        TextView button = (TextView)view;
+        TextView button = (TextView) view;
         int id = button.getId();
 
         if (id == R.id.buttonEasy) {
