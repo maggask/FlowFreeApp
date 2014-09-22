@@ -18,24 +18,18 @@ public class PlayActivity extends Activity {
         setContentView(R.layout.activity_play);
     }
 
-
     public void buttonClick(View view) {
         SharedPreferences settings = getSharedPreferences( "SwitchPref", MODE_PRIVATE );
-
         boolean soundOn = settings.getBoolean("soundSettings", false);
+
         if(soundOn) {
             Sound s = new Sound();
             s.playSound(this);
         }
         TextView button = (TextView) view;
-        //ImageView backButton = (ImageView) view;
-
-        //int backId = backButton.getId();
         int id = button.getId();
 
-        /*if (backId == R.id.backButton) {
-            startActivity(new Intent(this, MainActivity.class));
-        }*/
+
         if (id == R.id.buttonEasy) {
             startActivity(new Intent(this, EasyActivity.class));
             this.finish ();

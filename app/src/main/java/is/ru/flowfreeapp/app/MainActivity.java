@@ -20,7 +20,6 @@ public class MainActivity extends Activity {
         SharedPreferences settings = getSharedPreferences( "SwitchPref", MODE_PRIVATE );
         SharedPreferences.Editor editor = settings.edit();
         editor.commit();
-
     }
 
     public void buttonClick( View view ) {
@@ -36,18 +35,18 @@ public class MainActivity extends Activity {
             Vibration v = new Vibration();
             v.vibrate(this);
         }
-        else{
-            Toast.makeText(this, "sound is not on", Toast.LENGTH_SHORT).show();
-        }
+
         TextView button = (TextView) view;
         int id = button.getId();
-        if ( id == R.id.buttonPlay ) {
 
-        startActivity(new Intent(this, PlayActivity.class));
+        if ( id == R.id.buttonPlay ) {
+            startActivity(new Intent(this, PlayActivity.class));
         }
+
         else if ( id == R.id.buttonSettings ) {
             startActivity( new Intent( this, SettingsActivity.class ) );
         }
+
         else if ( id == R.id.buttonInstructions ) {
             startActivity( new Intent( this, InstructionsActivity.class ) );
         }

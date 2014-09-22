@@ -23,8 +23,8 @@ public class EasyActivity extends Activity {
 
     public void buttonClick( View view ) {
         SharedPreferences settings = getSharedPreferences( "SwitchPref", MODE_PRIVATE );
-
         boolean soundOn = settings.getBoolean("soundSettings", false);
+
         if(soundOn){
             Sound s = new Sound();
             s.playSound(this);
@@ -47,7 +47,6 @@ public class EasyActivity extends Activity {
 
     public void backClick(View view) {
         SharedPreferences settings = getSharedPreferences( "SwitchPref", MODE_PRIVATE );
-
         boolean soundOn = settings.getBoolean("soundSettings", false);
 
         if(soundOn){
@@ -59,6 +58,7 @@ public class EasyActivity extends Activity {
 
         if (backId == R.id.backButton) {
             startActivity(new Intent(this, PlayActivity.class));
+            this.finish();
         }
     }
 }
