@@ -28,7 +28,7 @@ public class PlayActivity extends Activity {
     public void buttonClick(View view) {
         Sound s = new Sound();
         s.playSound(this);
-        TextView button = (TextView) view;
+        TextView button = (TextView)view;
         int id = button.getId();
 
         if (id == R.id.buttonEasy) {

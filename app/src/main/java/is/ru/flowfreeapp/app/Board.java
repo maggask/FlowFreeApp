@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,7 +28,7 @@ public class Board extends View {
 
     private boolean[][] board = new boolean[NUM_CELLS][NUM_CELLS];
 
-    private int totalMoves = 0;
+    public int totalMoves = 0;
 
     private int totalConnections = 0;
 
