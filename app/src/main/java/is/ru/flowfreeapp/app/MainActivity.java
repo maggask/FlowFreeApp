@@ -17,9 +17,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SharedPreferences settings = getSharedPreferences( "SwitchPref", MODE_PRIVATE );
-        SharedPreferences.Editor editor = settings.edit();
-        editor.commit();
+
 
     }
 
