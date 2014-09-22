@@ -6,7 +6,6 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import is.ru.flowfreeapp.app.Global;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,7 +14,7 @@ import java.util.Random;
 
 public class Board extends View {
 
-    private final int NUM_CELLS = 5;
+    private int NUM_CELLS = 5;
     private int m_cellWidth;
     private int m_cellHeight;
 
@@ -23,7 +22,6 @@ public class Board extends View {
     private Paint m_paintGrid  = new Paint();
     private Paint m_paintPath  = new Paint();
     private Path m_path = new Path();
-    private Path dP_path = new Path();
     private Rect pathRect = new Rect();
     private dotPath m_cellPath = null;
 
@@ -68,9 +66,10 @@ public class Board extends View {
 
         ArrayList<Pack> packList = (ArrayList<Pack>) global.mPacks;
 
-        //Puzzle puzzle = packList[0].mPuzzle[0];
         Puzzle puzzle = packList.get(0).getPuzzles().get(0);
 
+        int gridSize = Integer.parseInt(puzzle.getSize());
+        NUM_CELLS = gridSize;
         String flows = puzzle.getFlows();
         String[] dotsForm = flows.split("\\,");
         ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
@@ -90,6 +89,7 @@ public class Board extends View {
         }
         int j = 0, k = 1;
         Random rand = new Random();
+        // TODO: check if size is odd
         for (int i = 0; i < coordinates.size()/2; i++) {
             int r = rand.nextInt(255);
             int g = rand.nextInt(255);
@@ -139,24 +139,6 @@ public class Board extends View {
             }
         }
 
-        m_path.reset();
-
-        if (m_cellPath != null) {
-            if (!m_cellPath.isEmpty()) {
-                List<Coordinate> colist = m_cellPath.getPath();
-                Coordinate co = colist.get(0);
-                m_path.moveTo(colToX(co.getCol()) + m_cellWidth / 2,
-                        rowToY(co.getRow()) + m_cellHeight / 2);
-
-                for (int i = 1; i < colist.size(); ++i) {
-                    co = colist.get(i);
-                    m_path.lineTo(colToX(co.getCol()) + m_cellWidth / 2,
-                            rowToY(co.getRow()) + m_cellHeight / 2);
-                }
-            }
-        }
-
-
         for (dotPath dP : dotPaths) {
             Paint circlePaint = new Paint();
             circlePaint.setStyle(Paint.Style.FILL);
@@ -171,19 +153,31 @@ public class Board extends View {
             );
         }
 
-        dP_path.reset();
         for(int i = 0; i < board[0].length; i++) {
             Arrays.fill(board[i], false);
         }
+
+
+        Paint pathPaint = new Paint();
+        pathPaint.setStyle(Paint.Style.STROKE);
+        pathPaint.setStrokeWidth(32);
+        pathPaint.setStrokeCap(Paint.Cap.ROUND);
+        pathPaint.setStrokeJoin(Paint.Join.ROUND);
+        pathPaint.setAntiAlias(true);
+
         for (dotPath dP : dotPaths) {
             if (dP.getPath() != null) {
                 if (!dP.getPath().isEmpty()) {
+
                     Coordinate coTo = dP.getPath().get(0);
-                    dP_path.moveTo(colToX(coTo.getCol()) + m_cellWidth / 2,
+                    Path forPath = new Path();
+                    forPath.moveTo(colToX(coTo.getCol()) + m_cellWidth / 2,
                             rowToY(coTo.getRow()) + m_cellHeight / 2);
                     for (Coordinate coO : dP.getPath()) {
                         int x = colToX(coO.getCol());
                         int y = rowToY(coO.getRow());
+
+                        pathPaint.setColor(dP.getPathColor());
                         Paint paint = new Paint();
                         paint.setStyle(Paint.Style.FILL);
                         paint.setColor(dP.getPathColor());
@@ -191,9 +185,9 @@ public class Board extends View {
                         pathRect.set(x, y, x + m_cellWidth, y + m_cellHeight);
                         canvas.drawRect(pathRect, paint);
 
-                        dP_path.lineTo(colToX(coO.getCol()) + m_cellWidth / 2,
+                        forPath.lineTo(colToX(coO.getCol()) + m_cellWidth / 2,
                                 rowToY(coO.getRow()) + m_cellHeight / 2);
-                        canvas.drawPath(dP_path, m_paintPath);
+                        canvas.drawPath(forPath, pathPaint);
 
                         board[coO.getCol()][coO.getRow()] = true;
 
@@ -201,7 +195,7 @@ public class Board extends View {
                 }
             }
         }
-        canvas.drawPath(m_path, m_paintPath);
+        //canvas.drawPath(m_path, m_paintPath);
     }
 
     private boolean areNeighbours(int c1, int r1, int c2, int r2) {
@@ -236,89 +230,92 @@ public class Board extends View {
         }
         else if (event.getAction() == MotionEvent.ACTION_MOVE) {
 
-            if (!m_cellPath.isEmpty()) {
-                List<Coordinate> coordinateList = m_cellPath.getPath();
-                Coordinate last = coordinateList.get(coordinateList.size()-1);
-                Coordinate secondToLast = null;
+            if(m_cellPath != null) {
+                if (!m_cellPath.isEmpty()) {
+                    List<Coordinate> coordinateList = m_cellPath.getPath();
+                    Coordinate last = coordinateList.get(coordinateList.size() - 1);
+                    Coordinate secondToLast = null;
 
-                if (coordinateList.size() >= 2) {
-                    secondToLast = coordinateList.get(coordinateList.size() - 2);
-                }
-
-                if (areNeighbours(last.getCol(),last.getRow(), c, r)) {
-                    Coordinate newCo = new Coordinate(c, r);
-                    boolean addToPath = true;
-
-                    // Checks if the dots are now connected and if you are going beyond the connection
-                    if (!newCo.equals(secondToLast)) {
-                        if (coordinateList.contains(m_cellPath.getStart()) && coordinateList.contains(m_cellPath.getEnd())) {
-                            addToPath = false;
-                        }
+                    if (coordinateList.size() >= 2) {
+                        secondToLast = coordinateList.get(coordinateList.size() - 2);
                     }
-                    for (dotPath dP : dotPaths) {
-                        if (secondToLast != null) {
-                            if (!newCo.equals(secondToLast)) {
+
+                    if (areNeighbours(last.getCol(), last.getRow(), c, r)) {
+                        Coordinate newCo = new Coordinate(c, r);
+                        boolean addToPath = true;
+
+                        // Checks if the dots are now connected and if you are going beyond the connection
+                        if (!newCo.equals(secondToLast)) {
+                            if (coordinateList.contains(m_cellPath.getStart()) && coordinateList.contains(m_cellPath.getEnd())) {
+                                addToPath = false;
+                            }
+                        }
+                        for (dotPath dP : dotPaths) {
+                            if (secondToLast != null) {
+                                if (!newCo.equals(secondToLast)) {
+                                    if (!dP.equals(m_cellPath) && (dP.getStart().equals(newCo) || dP.getEnd().equals(newCo))) {
+                                        addToPath = false;
+                                        dP.setConnected(true);
+                                        break;
+                                    }
+                                }
+                            } else {
                                 if (!dP.equals(m_cellPath) && (dP.getStart().equals(newCo) || dP.getEnd().equals(newCo))) {
-                                    addToPath = false;
                                     dP.setConnected(true);
+                                    addToPath = false;
                                     break;
                                 }
                             }
-                        }
-                        else {
-                            if (!dP.equals(m_cellPath) && (dP.getStart().equals(newCo) || dP.getEnd().equals(newCo))) {
-                                dP.setConnected(true);
-                                addToPath = false;
-                                break;
+                            if (!dP.equals(m_cellPath) && dP.crossesPath(last)) {
+                                dP.clearFromPath(last);
                             }
                         }
-                        if(!dP.equals(m_cellPath) && dP.crossesPath(last)) {
-                            dP.clearFromPath(last);
-                        }
-                    }
 
-                    if (addToPath) {
-                        m_cellPath.append(newCo);
-                        invalidate();
+                        if (addToPath) {
+                            m_cellPath.append(newCo);
+                            invalidate();
+                        }
                     }
                 }
             }
         }
         else if (event.getAction() == MotionEvent.ACTION_UP) {
-            if (!m_cellPath.isEmpty()) {
-                List<Coordinate> list = m_cellPath.getPath();
-                totalMoves++;
-                totalConnections = 0;
-                for(dotPath dP : dotPaths) {
-                    List<Coordinate> dPList = dP.getPath();
-                    if(dPList.contains(m_cellPath.getStart()) && dPList.contains(m_cellPath.getEnd())) {
-                        dP.setConnected(true);
-                    }
-                    if (m_cellPath.equals(dP)){
-                        List<Coordinate> newList = new ArrayList<Coordinate>();
+            if(m_cellPath != null) {
+                if (!m_cellPath.isEmpty()) {
+                    List<Coordinate> list = m_cellPath.getPath();
+                    totalMoves++;
+                    totalConnections = 0;
+                    for (dotPath dP : dotPaths) {
+                        List<Coordinate> dPList = dP.getPath();
+                        if (dPList.contains(m_cellPath.getStart()) && dPList.contains(m_cellPath.getEnd())) {
+                            dP.setConnected(true);
+                        }
+                        if (m_cellPath.equals(dP)) {
+                            List<Coordinate> newList = new ArrayList<Coordinate>();
 
-                        for (Coordinate co : list){
-                            newList.add(co.clone());
-                        }
-                        dP.setPath(newList);
-                        break;
-                    }
-                }
-                for(dotPath dP : dotPaths) {
-                    if(!dP.getConnected())
-                        isVictory = false;
-                }
-                m_cellPath.setPath(list);
-                invalidate();
-                if(isVictory) {
-                    for(int i = 0; i < NUM_CELLS; i++) {
-                        for(int j = 0; j < NUM_CELLS; j++) {
-                            if(!board[i][j])
-                                isVictory = false;
+                            for (Coordinate co : list) {
+                                newList.add(co.clone());
+                            }
+                            dP.setPath(newList);
+                            break;
                         }
                     }
-                    if(isVictory)
-                        winningFunction();
+                    for (dotPath dP : dotPaths) {
+                        if (!dP.getConnected())
+                            isVictory = false;
+                    }
+                    m_cellPath.setPath(list);
+                    invalidate();
+                    if (isVictory) {
+                        for (int i = 0; i < NUM_CELLS; i++) {
+                            for (int j = 0; j < NUM_CELLS; j++) {
+                                if (!board[i][j])
+                                    isVictory = false;
+                            }
+                        }
+                        if (isVictory)
+                            winningFunction();
+                    }
                 }
             }
         }
