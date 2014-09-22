@@ -23,6 +23,7 @@ public class SettingsActivity extends Activity {
         Switch s1 = (Switch) findViewById(R.id.switch1);
         Switch s2 = (Switch) findViewById(R.id.switch2);
         Switch s3 = (Switch) findViewById(R.id.switch3);
+
         SharedPreferences settings = getSharedPreferences( "SwitchPref", MODE_PRIVATE );
         boolean vibrationOn = settings.getBoolean("vibrationSettings", false);
         boolean soundOn = settings.getBoolean("soundSettings", false);
