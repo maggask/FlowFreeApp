@@ -3,6 +3,7 @@ package is.ru.flowfreeapp.app;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -25,7 +26,6 @@ public class PlayActivity extends Activity {
         }
         TextView button = (TextView) view;
         int id = button.getId();
-
 
         if (id == R.id.buttonEasy) {
             startActivity(new Intent(this, EasyActivity.class));
