@@ -3,6 +3,7 @@ package is.ru.flowfreeapp.app;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -32,6 +33,8 @@ public class MainActivity extends Activity {
         
         try {
             List<Pack> packs = new ArrayList<Pack>();
+            AssetManager am = getAssets();
+            InputStream is = am.open( "packs/packs.xml" );
             readPack(getAssets().open("packs/packs.xml"), packs);
             mGlobals.mPacks = packs;
 
@@ -81,7 +84,7 @@ public class MainActivity extends Activity {
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element eNode = (Element) nNode;
                     String size = eNode.getElementsByTagName("size").item(0).getFirstChild().getNodeValue();
-                    String flow = eNode.getElementsByTagName("flow").item(0).getFirstChild().getNodeValue();
+                    String flow = eNode.getElementsByTagName("flows").item(0).getFirstChild().getNodeValue();
                     puzzles.add(new Puzzle(size, flow));
                 }
             }
@@ -107,18 +110,15 @@ public class MainActivity extends Activity {
 
         TextView button = (TextView) view;
         int id = button.getId();
+        if (id == R.id.buttonPlay) {
 
-        if ( id == R.id.buttonPlay ) {
-            startActivity(new Intent(this, PlayActivity.class));
+        startActivity(new Intent(this, PlayActivity.class));
         }
-
-        else if ( id == R.id.buttonSettings ) {
-            startActivity( new Intent( this, SettingsActivity.class ) );
+        else if (id == R.id.buttonSettings) {
+            startActivity(new Intent(this, SettingsActivity.class));
         }
-
-        else if ( id == R.id.buttonInstructions ) {
-            startActivity( new Intent( this, InstructionsActivity.class ) );
+        else if (id == R.id.buttonInstructions) {
+            startActivity(new Intent(this, InstructionsActivity.class));
         }
     }
-
 }
