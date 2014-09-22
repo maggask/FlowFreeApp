@@ -2,11 +2,11 @@ package is.ru.flowfreeapp.app;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 /**
   * @(#)FlowFreeApp 12.9.2014 Anna  
@@ -22,8 +22,13 @@ public class EasyActivity extends Activity {
     }
 
     public void buttonClick( View view ) {
-        Sound s = new Sound();
-        s.playSound(this);
+        SharedPreferences settings = getSharedPreferences( "SwitchPref", MODE_PRIVATE );
+
+        boolean soundOn = settings.getBoolean("soundSettings", false);
+        if(soundOn){
+            Sound s = new Sound();
+            s.playSound(this);
+        }
         ImageButton button = (ImageButton) view;
         int id = button.getId();
         if (id == R.id.game1) {
@@ -41,8 +46,14 @@ public class EasyActivity extends Activity {
     }
 
     public void backClick(View view) {
-        Sound s = new Sound();
-        s.playSound(this);
+        SharedPreferences settings = getSharedPreferences( "SwitchPref", MODE_PRIVATE );
+
+        boolean soundOn = settings.getBoolean("soundSettings", false);
+
+        if(soundOn){
+            Sound s = new Sound();
+            s.playSound(this);
+        }
         ImageView backButton = (ImageView) view;
         int backId = backButton.getId();
 

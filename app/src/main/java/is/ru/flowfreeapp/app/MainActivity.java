@@ -2,9 +2,11 @@ package is.ru.flowfreeapp.app;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
     /**
@@ -14,12 +16,29 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        SharedPreferences settings = getSharedPreferences( "SwitchPref", MODE_PRIVATE );
+        SharedPreferences.Editor editor = settings.edit();
+        editor.commit();
+
     }
 
-
     public void buttonClick( View view ) {
-        Sound s = new Sound();
-        s.playSound(this);
+        SharedPreferences settings = getSharedPreferences( "SwitchPref", MODE_PRIVATE );
+        boolean soundOn = settings.getBoolean("soundSettings", false);
+        boolean vibrateOn = settings.getBoolean("vibrationSettings", false);
+
+        if(soundOn){
+            Sound s = new Sound();
+            s.playSound(this);
+        }
+        if(vibrateOn){
+            Vibration v = new Vibration();
+            v.vibrate(this);
+        }
+        else{
+            Toast.makeText(this, "sound is not on", Toast.LENGTH_SHORT).show();
+        }
         TextView button = (TextView) view;
         int id = button.getId();
         if ( id == R.id.buttonPlay ) {
@@ -33,4 +52,6 @@ public class MainActivity extends Activity {
             startActivity( new Intent( this, InstructionsActivity.class ) );
         }
     }
+
+
 }
