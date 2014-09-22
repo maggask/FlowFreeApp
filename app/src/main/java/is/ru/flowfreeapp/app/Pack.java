@@ -1,5 +1,6 @@
 package is.ru.flowfreeapp.app;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,6 +11,9 @@ public class Pack {
     private String mDescription;
     private String mFile;
 
+    private List<Puzzle> mPuzzle = new ArrayList<Puzzle>();
+
+
     Pack(String name, String description, String file)  {
         mName = name;
         mDescription = description;
@@ -19,4 +23,5 @@ public class Pack {
     String getName() { return mName; }
     String getDescription() { return mDescription; }
     String getFile() { return mFile; }
+    List<Puzzle> getPuzzles() { return mPuzzle; }
 }
