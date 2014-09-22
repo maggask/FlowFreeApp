@@ -27,10 +27,11 @@
     <Switch
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Vibrations"
+            android:text="Vibration"
             android:id="@+id/switch1"
-            android:checked="false"
-            android:textSize="35dp"
+            android:checked="true"
+            android:textSize="30dp"
+            android:onClick="switchClick"
             android:paddingTop="20dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"/>
@@ -39,8 +40,9 @@
             android:layout_height="wrap_content"
             android:text="Sound"
             android:id="@+id/switch2"
-            android:checked="false"
-            android:textSize="35dp"
+            android:checked="true"
+            android:textSize="30dp"
+            android:onClick="switchClick"
             android:paddingTop="20dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"/>
@@ -49,9 +51,10 @@
             android:layout_height="wrap_content"
             android:text="Letters"
             android:id="@+id/switch3"
-            android:checked="false"
+            android:checked="true"
+            android:onClick="switchClick"
             android:paddingTop="20dp"
-            android:textSize="35dp"
+            android:textSize="30dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"/>
     <Button
@@ -59,7 +62,7 @@
             android:layout_height="wrap_content"
             android:text="Reset Progress"
             android:id="@+id/button"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="40dp"
             android:layout_marginLeft="100dp"
             android:layout_marginRight="100dp"
             android:textColor="#ff9b30ff"

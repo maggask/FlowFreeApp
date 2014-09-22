@@ -9,9 +9,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-/**
- * Created by yngvi on 8.9.2014.
- */
 public class PlayActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -20,13 +17,19 @@ public class PlayActivity extends Activity {
     }
 
     public void buttonClick(View view) {
-        Sound s = new Sound();
-        s.playSound(this);
+        SharedPreferences settings = getSharedPreferences( "SwitchPref", MODE_PRIVATE );
+        boolean soundOn = settings.getBoolean("soundSettings", false);
+
+        if(soundOn) {
+            Sound s = new Sound();
+            s.playSound(this);
+        }
         TextView button = (TextView) view;
         int id = button.getId();
 
         if (id == R.id.buttonEasy) {
             startActivity(new Intent(this, EasyActivity.class));
+            this.finish ();
         }
         /*else if ( id == R.id.buttonMedium ) {
             startActivity( new Intent( this, MediumActivity.class ) );
@@ -37,13 +40,19 @@ public class PlayActivity extends Activity {
     }
 
     public void backClick(View view) {
-        Sound s = new Sound();
-        s.playSound(this);
+        SharedPreferences settings = getSharedPreferences( "SwitchPref", MODE_PRIVATE );
+
+        boolean soundOn = settings.getBoolean("soundSettings", false);
+        if(soundOn){
+            Sound s = new Sound();
+            s.playSound(this);
+        }
         ImageView backButton = (ImageView) view;
         int backId = backButton.getId();
 
         if (backId == R.id.backButton) {
             startActivity(new Intent(this, MainActivity.class));
+            this.finish ();
         }
     }
 }

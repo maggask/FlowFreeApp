@@ -1,9 +1,7 @@
 package is.ru.flowfreeapp.app;
 
-import android.app.Activity;
 import android.content.Context;
 import android.media.MediaPlayer;
-import android.os.Bundle;
 
 /**
   * @(#)FlowFreeApp 18.9.2014 Anna  
@@ -11,24 +9,21 @@ import android.os.Bundle;
   * Copyright (c) Anna Laufey Stefánsdóttir  
   */
 
-public class Sound extends Activity {
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+public class Sound {
 
     public void playSound(Context context){
-        MediaPlayer mp = new MediaPlayer();
-        if (mp != null)
-        {
-            mp.release();
-            mp = null;
+
+            MediaPlayer mediaPlayer = new MediaPlayer();
+            if (mediaPlayer != null) {
+                mediaPlayer.release();
+                mediaPlayer = null;
+            }
+            try {
+                mediaPlayer = MediaPlayer.create(context, R.raw.plopp);
+                mediaPlayer.start();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-        try {
-            mp = MediaPlayer.create(context, R.raw.plopp);
-            mp.start();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+
 }

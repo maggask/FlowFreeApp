@@ -2,6 +2,7 @@ package is.ru.flowfreeapp.app;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.view.View;
@@ -25,7 +26,11 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+       
+        SharedPreferences settings = getSharedPreferences( "SwitchPref", MODE_PRIVATE );
+        SharedPreferences.Editor editor = settings.edit();
+        editor.commit();
+        
         try {
             List<Pack> packs = new ArrayList<Pack>();
             AssetManager am = getAssets();
@@ -89,9 +94,20 @@ public class MainActivity extends Activity {
         }
     }
 
-    public void buttonClick(View view) {
-        Sound s = new Sound();
-        s.playSound(this);
+    public void buttonClick( View view ) {
+        SharedPreferences settings = getSharedPreferences( "SwitchPref", MODE_PRIVATE );
+        boolean soundOn = settings.getBoolean("soundSettings", false);
+        boolean vibrateOn = settings.getBoolean("vibrationSettings", false);
+
+        if(soundOn){
+            Sound s = new Sound();
+            s.playSound(this);
+        }
+        if(vibrateOn){
+            Vibration v = new Vibration();
+            v.vibrate(this);
+        }
+
         TextView button = (TextView) view;
         int id = button.getId();
         if (id == R.id.buttonPlay) {
