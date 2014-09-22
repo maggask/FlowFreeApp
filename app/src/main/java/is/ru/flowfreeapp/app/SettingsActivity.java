@@ -23,7 +23,8 @@ public class SettingsActivity extends Activity {
         Switch s1 = (Switch) findViewById(R.id.switch1);
         Switch s2 = (Switch) findViewById(R.id.switch2);
         Switch s3 = (Switch) findViewById(R.id.switch3);
-        SharedPreferences settings = getSharedPreferences( "SwitchPref", MODE_PRIVATE );
+
+        SharedPreferences settings = getSharedPreferences("SwitchPref", MODE_PRIVATE);
         boolean vibrationOn = settings.getBoolean("vibrationSettings", false);
         boolean soundOn = settings.getBoolean("soundSettings", false);
         boolean letterOn = settings.getBoolean("letterSettings", false);
@@ -45,21 +46,22 @@ public class SettingsActivity extends Activity {
             }
         }
 
-    public void setPref(String aSettings, boolean isOn){
-        SharedPreferences settings = getSharedPreferences( "SwitchPref", MODE_PRIVATE );
+    public void setPref(String aSettings, boolean isOn) {
+        SharedPreferences settings = getSharedPreferences("SwitchPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = settings.edit();
         editor.putBoolean(aSettings, isOn);
         editor.commit();
     }
 
     public void backClick(View view) {
-        SharedPreferences settings = getSharedPreferences( "SwitchPref", MODE_PRIVATE );
+        SharedPreferences settings = getSharedPreferences("SwitchPref", MODE_PRIVATE);
 
         boolean soundOn = settings.getBoolean("soundSettings", false);
-        if(soundOn){
+        if (soundOn) {
             Sound s = new Sound();
             s.playSound(this);
         }
+
         ImageView backButton = (ImageView) view;
         int backId = backButton.getId();
 
@@ -68,6 +70,4 @@ public class SettingsActivity extends Activity {
             this.finish ();
         }
     }
-
-
 }

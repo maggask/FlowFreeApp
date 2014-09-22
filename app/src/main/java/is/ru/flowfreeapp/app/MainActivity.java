@@ -33,8 +33,6 @@ public class MainActivity extends Activity {
         
         try {
             List<Pack> packs = new ArrayList<Pack>();
-            AssetManager am = getAssets();
-            InputStream is = am.open( "packs/packs.xml" );
             readPack(getAssets().open("packs/packs.xml"), packs);
             mGlobals.mPacks = packs;
 
@@ -95,24 +93,24 @@ public class MainActivity extends Activity {
     }
 
     public void buttonClick( View view ) {
-        SharedPreferences settings = getSharedPreferences( "SwitchPref", MODE_PRIVATE );
+        SharedPreferences settings = getSharedPreferences("SwitchPref", MODE_PRIVATE);
         boolean soundOn = settings.getBoolean("soundSettings", false);
         boolean vibrateOn = settings.getBoolean("vibrationSettings", false);
 
-        if(soundOn){
+        if (soundOn) {
             Sound s = new Sound();
             s.playSound(this);
         }
-        if(vibrateOn){
+        if (vibrateOn) {
             Vibration v = new Vibration();
             v.vibrate(this);
         }
 
         TextView button = (TextView) view;
         int id = button.getId();
-        if (id == R.id.buttonPlay) {
 
-        startActivity(new Intent(this, PlayActivity.class));
+        if (id == R.id.buttonPlay) {
+            startActivity(new Intent(this, PlayActivity.class));
         }
         else if (id == R.id.buttonSettings) {
             startActivity(new Intent(this, SettingsActivity.class));

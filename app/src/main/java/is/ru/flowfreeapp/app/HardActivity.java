@@ -9,16 +9,14 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 /**
-  * @(#)FlowFreeApp 12.9.2014 Anna  
-  *  
-  * Copyright (c) Anna Laufey Stefánsdóttir  
-  */
+ * Created by margretskristjansdottir on 22.9.14.
+ */
+public class HardActivity extends Activity {
 
-public class EasyActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_easy);
+        setContentView(R.layout.activity_hard);
     }
 
     public void buttonClick(View view) {
@@ -57,7 +55,7 @@ public class EasyActivity extends Activity {
         ImageView backButton = (ImageView) view;
         int backId = backButton.getId();
 
-        if (backId == R.id.backEasyButton) {
+        if (backId == R.id.backHardButton) {
             startActivity(new Intent(this, PlayActivity.class));
             this.finish();
         }

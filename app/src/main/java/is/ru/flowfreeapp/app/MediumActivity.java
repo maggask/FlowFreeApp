@@ -9,16 +9,14 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 /**
-  * @(#)FlowFreeApp 12.9.2014 Anna  
-  *  
-  * Copyright (c) Anna Laufey Stefánsdóttir  
-  */
+ * Created by margretskristjansdottir on 22.9.14.
+ */
+public class MediumActivity extends Activity{
 
-public class EasyActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_easy);
+        setContentView(R.layout.activity_medium);
     }
 
     public void buttonClick(View view) {
@@ -48,16 +46,21 @@ public class EasyActivity extends Activity {
     public void backClick(View view) {
         SharedPreferences settings = getSharedPreferences("SwitchPref", MODE_PRIVATE);
         boolean soundOn = settings.getBoolean("soundSettings", false);
+        boolean vibrateOn = settings.getBoolean("vibrationSettings", false);
 
-        if (soundOn) {
+        if (soundOn){
             Sound s = new Sound();
             s.playSound(this);
+        }
+        if (vibrateOn) {
+            Vibration v = new Vibration();
+            v.vibrate(this);
         }
 
         ImageView backButton = (ImageView) view;
         int backId = backButton.getId();
 
-        if (backId == R.id.backEasyButton) {
+        if (backId == R.id.backMediumButton) {
             startActivity(new Intent(this, PlayActivity.class));
             this.finish();
         }

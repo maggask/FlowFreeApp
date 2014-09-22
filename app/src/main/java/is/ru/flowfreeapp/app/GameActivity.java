@@ -2,6 +2,7 @@ package is.ru.flowfreeapp.app;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -21,13 +22,20 @@ public class GameActivity extends Activity {
     }
 
     public void backClick(View view) {
-        Sound s = new Sound();
-        s.playSound(this);
-        ImageView backButton = (ImageView)view;
+        SharedPreferences settings = getSharedPreferences("SwitchPref", MODE_PRIVATE);
+        boolean soundOn = settings.getBoolean("soundSettings", false);
+
+        if (soundOn) {
+            Sound s = new Sound();
+            s.playSound(this);
+        }
+
+        ImageView backButton = (ImageView) view;
         int backId = backButton.getId();
 
         if (backId == R.id.backButton) {
-            startActivity(new Intent(this, EasyActivity.class));
+            startActivity(new Intent(this, PlayActivity.class));
+            this.finish ();
         }
     }
 

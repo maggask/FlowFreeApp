@@ -11,9 +11,10 @@ import android.media.MediaPlayer;
 
 public class Sound {
 
-    public void playSound(Context context){
+    public void playSound(Context context) {
 
             MediaPlayer mediaPlayer = new MediaPlayer();
+
             if (mediaPlayer != null) {
                 mediaPlayer.release();
                 mediaPlayer = null;
@@ -21,9 +22,9 @@ public class Sound {
             try {
                 mediaPlayer = MediaPlayer.create(context, R.raw.plopp);
                 mediaPlayer.start();
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 e.printStackTrace();
             }
         }
-
 }

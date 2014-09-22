@@ -10,9 +10,8 @@ import android.os.Vibrator;
   */
 
 public class Vibration {
-    public void vibrate(Context context){
+    public void vibrate(Context context) {
         Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
         vibrator.vibrate(500);
     }
-
 }

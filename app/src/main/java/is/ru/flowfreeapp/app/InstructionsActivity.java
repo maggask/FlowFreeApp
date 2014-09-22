@@ -21,18 +21,21 @@ public class InstructionsActivity extends Activity {
     }
 
     public void backClick(View view) {
-        SharedPreferences settings = getSharedPreferences( "SwitchPref", MODE_PRIVATE );
+        SharedPreferences settings = getSharedPreferences("SwitchPref", MODE_PRIVATE);
 
         boolean soundOn = settings.getBoolean("soundSettings", false);
-        if(soundOn){
+
+        if (soundOn) {
             Sound s = new Sound();
             s.playSound(this);
         }
+
         ImageView backButton = (ImageView) view;
         int backId = backButton.getId();
 
         if (backId == R.id.backButton) {
             startActivity(new Intent(this, MainActivity.class));
+            this.finish ();
         }
     }
 }
