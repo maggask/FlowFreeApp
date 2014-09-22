@@ -8,9 +8,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-/**
- * Created by yngvi on 8.9.2014.
- */
 public class PlayActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
