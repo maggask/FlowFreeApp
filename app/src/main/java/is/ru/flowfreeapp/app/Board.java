@@ -1,6 +1,8 @@
 package is.ru.flowfreeapp.app;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.*;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -323,6 +325,22 @@ public class Board extends View {
     }
 
     private void winningFunction() {
+
+        new AlertDialog.Builder(getContext())
+                .setTitle("Victory!")
+                .setMessage("Hurray! You won!")
+                .setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // continue with delete
+                    }
+                })
+                .setNegativeButton("Try Again", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do nothing
+                    }
+                })
+                .setIcon(android.R.drawable.star_big_on)
+                .show();
         Log.d("Winning", "Just won");
     }
 
