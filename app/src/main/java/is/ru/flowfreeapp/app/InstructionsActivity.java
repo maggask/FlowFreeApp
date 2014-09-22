@@ -35,6 +35,7 @@ public class InstructionsActivity extends Activity {
 
         if (backId == R.id.backButton) {
             startActivity(new Intent(this, MainActivity.class));
+            this.finish ();
         }
     }
 }

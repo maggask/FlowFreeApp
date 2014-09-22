@@ -35,6 +35,7 @@ public class GameActivity extends Activity {
 
         if (backId == R.id.backButton) {
             startActivity(new Intent(this, PlayActivity.class));
+            this.finish ();
         }
     }
 
