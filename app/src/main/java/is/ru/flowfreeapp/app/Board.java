@@ -6,11 +6,12 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.TextView;
+import is.ru.flowfreeapp.app.Global;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class Board extends View {
 
@@ -63,11 +64,47 @@ public class Board extends View {
         m_paintPath.setStrokeJoin(Paint.Join.ROUND);
         m_paintPath.setAntiAlias(true);
 
-        dotPaths.add(new dotPath(new Coordinate(0, 0), new Coordinate(1, 4), Color.GREEN));
+        Global global = Global.getInstance();
+
+        ArrayList<Pack> packList = (ArrayList<Pack>) global.mPacks;
+
+        //Puzzle puzzle = packList[0].mPuzzle[0];
+        Puzzle puzzle = packList.get(0).getPuzzles().get(0);
+
+        String flows = puzzle.getFlows();
+        String[] dotsForm = flows.split("\\,");
+        ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
+
+        for(String dots : dotsForm) {
+            String nolB = dots.replace("(", "");
+            String norB = nolB.replace(")", "");
+            String[] dot = norB.trim().split("\\s+");
+            String store = null;
+            for (int i = 0; i < dot.length; i++) {
+                if(i%2 == 0)
+                    store = dot[i];
+                else
+                    coordinates.add(new Coordinate(Integer.parseInt(store), Integer.parseInt(dot[i])));
+            }
+
+        }
+        int j = 0, k = 1;
+        Random rand = new Random();
+        for (int i = 0; i < coordinates.size()/2; i++) {
+            int r = rand.nextInt(255);
+            int g = rand.nextInt(255);
+            int b = rand.nextInt(255);
+            int randomColor = Color.rgb(r,g,b);
+            dotPaths.add(new dotPath(coordinates.get(j), coordinates.get(k), randomColor));
+            j+=2;
+            k+=2;
+        }
+
+        /*dotPaths.add(new dotPath(new Coordinate(0, 0), new Coordinate(1, 4), Color.GREEN));
         dotPaths.add(new dotPath(new Coordinate(2, 0), new Coordinate(1, 3), Color.BLACK));
         dotPaths.add(new dotPath(new Coordinate(2, 1), new Coordinate(2, 4), Color.BLUE));
         dotPaths.add(new dotPath(new Coordinate(4, 0), new Coordinate(3, 3), Color.WHITE));
-        dotPaths.add(new dotPath(new Coordinate(4, 1), new Coordinate(3, 4), Color.RED));
+        dotPaths.add(new dotPath(new Coordinate(4, 1), new Coordinate(3, 4), Color.RED));*/
 
     }
 
