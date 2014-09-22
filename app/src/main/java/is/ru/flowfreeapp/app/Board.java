@@ -3,10 +3,13 @@ package is.ru.flowfreeapp.app;
 import android.content.Context;
 import android.graphics.*;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Board extends View {
@@ -23,7 +26,11 @@ public class Board extends View {
     private Rect pathRect = new Rect();
     private dotPath m_cellPath = null;
 
-    //private Cellpath m_cellPath = new Cellpath();
+    private boolean[][] board = new boolean[NUM_CELLS][NUM_CELLS];
+
+    public int totalMoves = 0;
+
+    private int totalConnections = 0;
 
     private int xToCol(int x) {
         return (x - getPaddingLeft()) / m_cellWidth;
@@ -34,11 +41,11 @@ public class Board extends View {
     }
 
     private int colToX(int col) {
-        return col * m_cellWidth + getPaddingLeft() ;
+        return col * m_cellWidth + getPaddingLeft();
     }
 
     private int rowToY(int row) {
-        return row * m_cellHeight + getPaddingTop() ;
+        return row * m_cellHeight + getPaddingTop();
     }
 
     private ArrayList<dotPath> dotPaths = new ArrayList<dotPath>();
@@ -56,9 +63,12 @@ public class Board extends View {
         m_paintPath.setStrokeJoin(Paint.Join.ROUND);
         m_paintPath.setAntiAlias(true);
 
-        dotPaths.add(new dotPath(new Coordinate(0, 0), new Coordinate(0, 3), Color.GREEN));
-        dotPaths.add(new dotPath(new Coordinate(2, 0), new Coordinate(2, 3), Color.BLACK));
-        dotPaths.add(new dotPath(new Coordinate(4, 1), new Coordinate(4, 4), Color.BLUE));
+        dotPaths.add(new dotPath(new Coordinate(0, 0), new Coordinate(1, 4), Color.GREEN));
+        dotPaths.add(new dotPath(new Coordinate(2, 0), new Coordinate(1, 3), Color.BLACK));
+        dotPaths.add(new dotPath(new Coordinate(2, 1), new Coordinate(2, 4), Color.BLUE));
+        dotPaths.add(new dotPath(new Coordinate(4, 0), new Coordinate(3, 3), Color.WHITE));
+        dotPaths.add(new dotPath(new Coordinate(4, 1), new Coordinate(3, 4), Color.RED));
+
     }
 
     @Override
@@ -125,6 +135,9 @@ public class Board extends View {
         }
 
         dP_path.reset();
+        for(int i = 0; i < board[0].length; i++) {
+            Arrays.fill(board[i], false);
+        }
         for (dotPath dP : dotPaths) {
             if (dP.getPath() != null) {
                 if (!dP.getPath().isEmpty()) {
@@ -136,7 +149,7 @@ public class Board extends View {
                         int y = rowToY(coO.getRow());
                         Paint paint = new Paint();
                         paint.setStyle(Paint.Style.FILL);
-                        paint.setColor(Color.GREEN);
+                        paint.setColor(dP.getPathColor());
                         paint.setAlpha(75);
                         pathRect.set(x, y, x + m_cellWidth, y + m_cellHeight);
                         canvas.drawRect(pathRect, paint);
@@ -144,6 +157,8 @@ public class Board extends View {
                         dP_path.lineTo(colToX(coO.getCol()) + m_cellWidth / 2,
                                 rowToY(coO.getRow()) + m_cellHeight / 2);
                         canvas.drawPath(dP_path, m_paintPath);
+
+                        board[coO.getCol()][coO.getRow()] = true;
 
                     }
                 }
@@ -162,6 +177,7 @@ public class Board extends View {
         int y = (int)event.getY();
         int c = xToCol(x);
         int r = yToRow(y);
+        boolean isVictory = true;
 
         if (c >= NUM_CELLS || r >= NUM_CELLS) {
             return true;
@@ -196,26 +212,31 @@ public class Board extends View {
                     Coordinate newCo = new Coordinate(c, r);
                     boolean addToPath = true;
 
+                    // Checks if the dots are now connected and if you are going beyond the connection
                     if (!newCo.equals(secondToLast)) {
                         if (coordinateList.contains(m_cellPath.getStart()) && coordinateList.contains(m_cellPath.getEnd())) {
                             addToPath = false;
                         }
                     }
-
                     for (dotPath dP : dotPaths) {
                         if (secondToLast != null) {
                             if (!newCo.equals(secondToLast)) {
                                 if (!dP.equals(m_cellPath) && (dP.getStart().equals(newCo) || dP.getEnd().equals(newCo))) {
                                     addToPath = false;
+                                    dP.setConnected(true);
                                     break;
                                 }
                             }
                         }
                         else {
                             if (!dP.equals(m_cellPath) && (dP.getStart().equals(newCo) || dP.getEnd().equals(newCo))) {
+                                dP.setConnected(true);
                                 addToPath = false;
                                 break;
                             }
+                        }
+                        if(!dP.equals(m_cellPath) && dP.crossesPath(last)) {
+                            dP.clearFromPath(last);
                         }
                     }
 
@@ -229,8 +250,13 @@ public class Board extends View {
         else if (event.getAction() == MotionEvent.ACTION_UP) {
             if (!m_cellPath.isEmpty()) {
                 List<Coordinate> list = m_cellPath.getPath();
-
+                totalMoves++;
+                totalConnections = 0;
                 for(dotPath dP : dotPaths) {
+                    List<Coordinate> dPList = dP.getPath();
+                    if(dPList.contains(m_cellPath.getStart()) && dPList.contains(m_cellPath.getEnd())) {
+                        dP.setConnected(true);
+                    }
                     if (m_cellPath.equals(dP)){
                         List<Coordinate> newList = new ArrayList<Coordinate>();
 
@@ -241,11 +267,29 @@ public class Board extends View {
                         break;
                     }
                 }
+                for(dotPath dP : dotPaths) {
+                    if(!dP.getConnected())
+                        isVictory = false;
+                }
                 m_cellPath.setPath(list);
                 invalidate();
+                if(isVictory) {
+                    for(int i = 0; i < NUM_CELLS; i++) {
+                        for(int j = 0; j < NUM_CELLS; j++) {
+                            if(!board[i][j])
+                                isVictory = false;
+                        }
+                    }
+                    if(isVictory)
+                        winningFunction();
+                }
             }
         }
         return true;
+    }
+
+    private void winningFunction() {
+        Log.d("Winning", "Just won");
     }
 
     public void setColor(int color) {

@@ -3,7 +3,50 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:weightSum="1">
+    <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:id="@+id/backButton" android:src="@drawable/backbutton" android:padding="5dp"
+            android:onClick="backClick" android:clickable="true"
+            />
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Level 1"
+                android:id="@+id/textView"
+                android:textSize="20sp"
+                android:textColor="#ff9b30ff"
+                android:layout_marginLeft="30dp"
+                android:layout_marginBottom="5dp"
+                android:layout_gravity="left"
+                />
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/moves"
+                android:id="@+id/textMoves"
+                android:textSize="15sp"
+                android:textColor="#ff9b30ff"
+                android:layout_marginLeft="15dp"
+                android:layout_gravity="center"
+                />
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/nMoves"
+                android:id="@+id/textNmoves"
+                android:textSize="15sp"
+                android:textColor="#ff9b30ff"
+                android:layout_marginLeft="5dp"
+                android:layout_gravity="center"
+                />
+    </LinearLayout>
     <is.ru.flowfreeapp.app.Board
             android:id="@+id/board"
             android:layout_width="fill_parent"

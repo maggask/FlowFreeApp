@@ -21,7 +21,7 @@ public class ColorListActivity extends ListActivity {
         private int color;
         private String something_else;
 
-        ColorElement( int col, String sth ) {
+        ColorElement(int col, String sth) {
             color = col;
             something_else = sth;
         }
@@ -52,22 +52,22 @@ public class ColorListActivity extends ListActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mList.add( new ColorElement(Color.GREEN, "Frog") );
-        mList.add( new ColorElement(Color.RED, "Strawberry") );
+        mList.add(new ColorElement(Color.GREEN, "Frog"));
+        mList.add(new ColorElement(Color.RED, "Strawberry"));
 
         ArrayAdapter<ColorElement> adapter = new ArrayAdapter<ColorElement>(
-            this, android.R.layout.simple_list_item_1, mList );
+                this, android.R.layout.simple_list_item_1, mList);
 
-        setListAdapter( adapter );
+        setListAdapter(adapter);
     }
 
     @Override
     protected void onListItemClick( ListView l, View v, int position, long id ) {
-        ColorElement colorElement = (ColorElement) l.getAdapter().getItem( position );
+        ColorElement colorElement = (ColorElement) l.getAdapter().getItem(position);
 
-        SharedPreferences settings = getSharedPreferences( "ColorPref", MODE_PRIVATE );
+        SharedPreferences settings = getSharedPreferences("ColorPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = settings.edit();
-        editor.putInt( "pathColor", colorElement.getColor() );
+        editor.putInt("pathColor", colorElement.getColor());
         editor.commit();
     }
 }

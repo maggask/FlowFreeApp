@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<packs>
+    <pack id="1">
+        <name>Easy Pack</name>
+        <description>5x5 puzzle</description>
+        <file>packs/easy.xml</file>
+    </pack>
+    <pack id="2">
+        <name>Medium Pack</name>
+        <description>6x6</description>
+        <file>packs/medium.xml</file>
+    </pack>
+    <pack id="3">
+        <name>Hard Pack</name>
+        <description>7x7</description>
+        <file>packs/hard.xml</file>
+    </pack>
+</packs>

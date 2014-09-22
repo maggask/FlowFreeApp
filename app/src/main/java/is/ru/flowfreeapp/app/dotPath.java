@@ -1,6 +1,7 @@
 package is.ru.flowfreeapp.app;
 
 import android.graphics.Color;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,7 @@ public class dotPath {
     private Coordinate start = null;
     private List<Coordinate> path = new ArrayList<Coordinate>();
     private int pointColor;
+    private boolean isConnected = false;
 
     public dotPath(Coordinate start, Coordinate end, int color) {
         this.end = end;
@@ -37,6 +39,10 @@ public class dotPath {
     public Coordinate getStart() {
         return start;
     }
+
+    public void setConnected(boolean connected) { this.isConnected = connected; }
+
+    public boolean getConnected() { return this.isConnected; }
 
     public void reset() {
         if (this.path != null)
@@ -66,5 +72,19 @@ public class dotPath {
         }
         dotPath dP = (dotPath)other;
         return this.getStart().equals(dP.getStart());
+    }
+
+    public boolean crossesPath(Coordinate coordinate) {
+        return this.path.contains(coordinate);
+    }
+
+    public  void clearFromPath(Coordinate coordinate) {
+        int j = this.path.indexOf(coordinate);
+        if(j >= 0) {
+            int size = this.path.size();
+            for (int i = j; i < size; i++) {
+                this.path.remove(j);
+            }
+        }
     }
 }
