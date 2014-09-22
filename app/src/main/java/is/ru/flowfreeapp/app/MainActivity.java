@@ -110,9 +110,9 @@ public class MainActivity extends Activity {
 
         TextView button = (TextView) view;
         int id = button.getId();
-        if (id == R.id.buttonPlay) {
 
-        startActivity(new Intent(this, PlayActivity.class));
+        if (id == R.id.buttonPlay) {
+            startActivity(new Intent(this, PlayActivity.class));
         }
         else if (id == R.id.buttonSettings) {
             startActivity(new Intent(this, SettingsActivity.class));

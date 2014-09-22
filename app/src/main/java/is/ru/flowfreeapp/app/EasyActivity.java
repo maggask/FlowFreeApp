@@ -21,7 +21,7 @@ public class EasyActivity extends Activity {
         setContentView(R.layout.activity_easy);
     }
 
-    public void buttonClick( View view ) {
+    public void buttonClick(View view) {
         SharedPreferences settings = getSharedPreferences( "SwitchPref", MODE_PRIVATE );
         boolean soundOn = settings.getBoolean("soundSettings", false);
 
@@ -56,7 +56,7 @@ public class EasyActivity extends Activity {
         ImageView backButton = (ImageView) view;
         int backId = backButton.getId();
 
-        if (backId == R.id.backButton) {
+        if (backId == R.id.backEasyButton) {
             startActivity(new Intent(this, PlayActivity.class));
             this.finish();
         }
