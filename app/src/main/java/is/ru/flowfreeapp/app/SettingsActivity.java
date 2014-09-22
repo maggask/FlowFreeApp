@@ -36,15 +36,12 @@ public class SettingsActivity extends Activity {
             Switch s = (Switch) view;
             if (s.getId() == R.id.switch1) {
                 setPref("vibrationSettings", s.isChecked());
-                Toast.makeText(SettingsActivity.this, "vibration is" + s.isChecked(), Toast.LENGTH_SHORT).show();
             }
             if (s.getId() == R.id.switch2) {
                 setPref("soundSettings", s.isChecked());
-                Toast.makeText(SettingsActivity.this, "sound is" + s.isChecked(), Toast.LENGTH_SHORT).show();
             }
             if (s.getId() == R.id.switch3) {
                 setPref("letterSettings", s.isChecked());
-                Toast.makeText(SettingsActivity.this, "letters is" + s.isChecked(), Toast.LENGTH_SHORT).show();
             }
         }
 
