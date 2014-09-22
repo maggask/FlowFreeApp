@@ -40,13 +40,14 @@ public class PlayActivity extends Activity {
     }
 
     public void backClick(View view) {
-        SharedPreferences settings = getSharedPreferences( "SwitchPref", MODE_PRIVATE );
-
+        SharedPreferences settings = getSharedPreferences("SwitchPref", MODE_PRIVATE);
         boolean soundOn = settings.getBoolean("soundSettings", false);
-        if(soundOn){
+
+        if (soundOn) {
             Sound s = new Sound();
             s.playSound(this);
         }
+
         ImageView backButton = (ImageView) view;
         int backId = backButton.getId();
 

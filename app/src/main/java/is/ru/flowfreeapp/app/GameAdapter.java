@@ -17,18 +17,18 @@ public class GameAdapter {
     dbHelper dbHelper;
     Context context;
 
-    public GameAdapter( Context c ) {
+    public GameAdapter(Context c) {
         context = c;
     }
 
     public GameAdapter openToRead() {
-        dbHelper = new dbHelper( context );
+        dbHelper = new dbHelper(context);
         db = dbHelper.getReadableDatabase();
         return this;
     }
 
     public GameAdapter openToWrite() {
-        dbHelper = new dbHelper( context );
+        dbHelper = new dbHelper(context);
         db = dbHelper.getWritableDatabase();
         return this;
     }
@@ -45,7 +45,7 @@ public class GameAdapter {
         contentValues.put(cols[3], ((Integer)bestMove).toString());
 
         openToWrite();
-        long value = db.insert(dbHelper.TableGames, null, contentValues );
+        long value = db.insert(dbHelper.TableGames, null, contentValues);
         close();
         return value;
     }
@@ -70,7 +70,7 @@ public class GameAdapter {
         return cursor;
     }
 
-    public Cursor queryGames( int sid) {
+    public Cursor queryGames(int sid) {
         openToRead();
         String[] cols = dbHelper.TableGamesCols;
         Cursor cursor = db.query( dbHelper.TableGames,
