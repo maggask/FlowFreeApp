@@ -12,15 +12,9 @@
             android:clickable="true"
             android:padding="5dp"/>
     <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="Play"
             android:id="@+id/textView"
-            android:layout_gravity="center_horizontal"
-            android:textSize="50sp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:textColor="#ff9b30ff"/>
+            style="@style/Title"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

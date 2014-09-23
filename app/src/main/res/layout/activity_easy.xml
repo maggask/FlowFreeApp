@@ -4,17 +4,12 @@
               android:layout_width="fill_parent"
               android:layout_height="fill_parent">
     <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="Easy"
             android:id="@+id/textView"
-            android:layout_gravity="center_horizontal"
+            style="@style/Title"
             android:textSize="50sp"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:textColor="#ff9b30ff"/>
+            android:layout_centerHorizontal="true"/>
 
     <ListView
             android:id="@+id/list"
