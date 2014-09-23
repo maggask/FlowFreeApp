@@ -19,7 +19,7 @@ public class HardActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_easy);
+        setContentView(R.layout.activity_hard);
 
         // Get ListView object from xml
         listView = (ListView)findViewById(R.id.list);

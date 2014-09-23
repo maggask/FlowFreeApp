@@ -32,6 +32,5 @@
             android:clickable="true"
             android:onClick="backClick"
             android:padding="5dp"
-            android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/game3"/>
+            android:layout_alignParentTop="true"/>
 </RelativeLayout>
