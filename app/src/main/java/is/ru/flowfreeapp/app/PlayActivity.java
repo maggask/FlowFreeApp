@@ -23,6 +23,7 @@ public class PlayActivity extends Activity {
             Sound s = new Sound();
             s.playSound(this);
         }
+
         TextView button = (TextView) view;
         int id = button.getId();
 

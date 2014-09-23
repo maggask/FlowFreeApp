@@ -19,7 +19,7 @@ public class HardActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_easy);
+        setContentView(R.layout.activity_hard);
 
         // Get ListView object from xml
         listView = (ListView)findViewById(R.id.list);
@@ -27,6 +27,7 @@ public class HardActivity extends Activity {
         final Global global = Global.getInstance();
         ArrayList<Puzzle> hardPackList = (ArrayList)global.mPacks.get(2).getPuzzles();
         ArrayList<String> strList = new ArrayList<String>();
+
         for (int i = 0; i < hardPackList.size(); i++) {
             int levelNumber = i + 1;
             strList.add("Level " + levelNumber);
@@ -57,7 +58,6 @@ public class HardActivity extends Activity {
                         .show();
                 goToGame(view);
             }
-
         });
     }
 
@@ -65,10 +65,11 @@ public class HardActivity extends Activity {
         SharedPreferences settings = getSharedPreferences( "SwitchPref", MODE_PRIVATE );
         boolean soundOn = settings.getBoolean("soundSettings", false);
 
-        if(soundOn){
+        if (soundOn) {
             Sound s = new Sound();
             s.playSound(this);
         }
+
         startActivity(new Intent(this, GameActivity.class));
     }
 

@@ -16,7 +16,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final int DB_VERSION = 1;
 
     public static final String TableGames = "games";
-    public static final String[] TableGamesCols = { "_id", "gid", "isComplete", "difficulty", "bestMove" };
+    public static final String[] TableGamesCols = { "_id", "gid", "isComplete", "bestMove" };
 
     private static final String sqlCreateTableGames =
             "CREATE TABLE games(" +

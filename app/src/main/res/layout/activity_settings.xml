@@ -4,7 +4,6 @@
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
         >
-
     <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
@@ -15,22 +14,16 @@
             android:onClick="backClick"
             android:padding="5dp"/>
     <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="Settings"
             android:id="@+id/textView"
-            android:layout_gravity="center_horizontal"
-            android:textSize="50sp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:textColor="#ff9b30ff"/>
+            style="@style/Title"/>
     <Switch
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="Vibration"
             android:id="@+id/switch1"
             android:checked="true"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:onClick="switchClick"
             android:paddingTop="20dp"
             android:layout_marginLeft="20dp"
@@ -41,7 +34,7 @@
             android:text="Sound"
             android:id="@+id/switch2"
             android:checked="true"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:onClick="switchClick"
             android:paddingTop="20dp"
             android:layout_marginLeft="20dp"
@@ -54,7 +47,7 @@
             android:checked="true"
             android:onClick="switchClick"
             android:paddingTop="20dp"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"/>
     <Button
@@ -66,6 +59,7 @@
             android:layout_marginLeft="100dp"
             android:layout_marginRight="100dp"
             android:textColor="#ff9b30ff"
-            android:textSize="25dp" android:gravity="center|center_horizontal"
+            android:textSize="25dp"
+            android:gravity="center|center_horizontal"
             android:layout_gravity="center_horizontal"/>
 </LinearLayout>

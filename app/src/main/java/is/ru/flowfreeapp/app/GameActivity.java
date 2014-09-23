@@ -61,8 +61,7 @@ public class GameActivity extends Activity {
         int backId = backButton.getId();
 
         if (backId == R.id.backButton) {
-            startActivity(new Intent(this, PlayActivity.class));
-            this.finish ();
+            super.finish();
         }
     }
 

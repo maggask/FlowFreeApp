@@ -12,15 +12,9 @@
             android:clickable="true"
             android:padding="5dp"/>
     <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="Play"
             android:id="@+id/textView"
-            android:layout_gravity="center_horizontal"
-            android:textSize="50dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:textColor="#ff9b30ff"/>
+            style="@style/Title"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -29,7 +23,7 @@
             android:id="@+id/buttonEasy"
             android:layout_gravity="center_horizontal"
             android:layout_margin="20dp"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:onClick="buttonClick"
             android:clickable="true"/>
 
@@ -41,7 +35,7 @@
             android:id="@+id/buttonMedium"
             android:layout_gravity="center_horizontal"
             android:layout_margin="10dp"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:onClick="buttonClick"
             android:clickable="true"/>
     <TextView
@@ -52,7 +46,7 @@
             android:id="@+id/buttonHard"
             android:layout_gravity="center_horizontal"
             android:layout_margin="10dp"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:onClick="buttonClick"
             android:clickable="true"/>
 </LinearLayout>

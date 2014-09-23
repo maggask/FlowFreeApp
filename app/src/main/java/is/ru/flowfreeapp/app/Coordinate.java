@@ -27,7 +27,7 @@ public class Coordinate {
         if (!(other instanceof Coordinate)) {
             return false;
         }
-        Coordinate otherCo = (Coordinate)other;
+        Coordinate otherCo = (Coordinate) other;
         return otherCo.getCol() == this.getCol() && otherCo.getRow() == this.getRow();
     }
 
