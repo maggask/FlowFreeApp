@@ -100,7 +100,6 @@ public class MainActivity extends Activity {
             s.playSound(this);
         }
 
-
         TextView button = (TextView) view;
         int id = button.getId();
 

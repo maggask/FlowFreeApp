@@ -33,18 +33,19 @@ public class SettingsActivity extends Activity {
         s3.setChecked(letterOn);
     }
 
-        public void switchClick(View view) {
-            Switch s = (Switch) view;
-            if (s.getId() == R.id.switch1) {
-                setPref("vibrationSettings", s.isChecked());
-            }
-            if (s.getId() == R.id.switch2) {
-                setPref("soundSettings", s.isChecked());
-            }
-            if (s.getId() == R.id.switch3) {
-                setPref("letterSettings", s.isChecked());
-            }
+    public void switchClick(View view) {
+        Switch s = (Switch) view;
+
+        if (s.getId() == R.id.switch1) {
+            setPref("vibrationSettings", s.isChecked());
         }
+        if (s.getId() == R.id.switch2) {
+            setPref("soundSettings", s.isChecked());
+        }
+        if (s.getId() == R.id.switch3) {
+            setPref("letterSettings", s.isChecked());
+        }
+    }
 
     public void setPref(String aSettings, boolean isOn) {
         SharedPreferences settings = getSharedPreferences("SwitchPref", MODE_PRIVATE);
@@ -55,8 +56,8 @@ public class SettingsActivity extends Activity {
 
     public void backClick(View view) {
         SharedPreferences settings = getSharedPreferences("SwitchPref", MODE_PRIVATE);
-
         boolean soundOn = settings.getBoolean("soundSettings", false);
+
         if (soundOn) {
             Sound s = new Sound();
             s.playSound(this);

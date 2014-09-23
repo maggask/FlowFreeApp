@@ -25,7 +25,9 @@ public class ColorListActivity extends ListActivity {
             color = col;
             something_else = sth;
         }
+
         int getColor() { return color; }
+
         String getSomethingElse() { return something_else; }
 
         public String toString() {
@@ -67,6 +69,7 @@ public class ColorListActivity extends ListActivity {
 
         SharedPreferences settings = getSharedPreferences("ColorPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = settings.edit();
+
         editor.putInt("pathColor", colorElement.getColor());
         editor.commit();
     }

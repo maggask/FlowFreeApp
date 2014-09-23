@@ -30,6 +30,7 @@ public class EasyActivity extends Activity {
         final Global global = Global.getInstance();
         ArrayList<Puzzle> easyPackList = (ArrayList)global.mPacks.get(0).getPuzzles();
         ArrayList<String> strList = new ArrayList<String>();
+
         for (int i = 0; i < easyPackList.size(); i++) {
             int levelNumber = i + 1;
             strList.add("Level " + levelNumber);
