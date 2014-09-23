@@ -7,6 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.ArrayAdapter;
+
+import java.util.ArrayList;
 
 /**
   * @(#)FlowFreeApp 12.9.2014 Anna  
@@ -15,10 +19,24 @@ import android.widget.ImageView;
   */
 
 public class EasyActivity extends Activity {
+
+    ListView listView;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_easy);
+
+        // Get ListView object from xml
+        listView = (ListView)findViewById(R.id.list);
+
+        Global global = Global.getInstance();
+        ArrayList<Pack> packList = global.mPacks;
+
+        ArrayAdapter<Pack> adapter = new ArrayAdapter<Pack>(this,
+                android.R.layout.simple_list_item_1, android.R.id.text1, packList);
+
+        listView.setAdapter(adapter);
     }
 
     public void buttonClick(View view) {
