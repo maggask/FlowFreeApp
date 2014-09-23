@@ -23,6 +23,7 @@ public class DbHelper extends SQLiteOpenHelper {
                     " _id INTEGER PRIMARY KEY AUTOINCREMENT," +
                     " gid INTEGER NOT NULL," +
                     " isComplete BOOLEAN," +
+                    " difficulty INTEGER," +
                     " bestMove INTEGER" +
                     ");";
 
