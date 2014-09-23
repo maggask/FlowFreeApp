@@ -13,18 +13,18 @@ public class Sound {
 
     public void playSound(Context context) {
 
-            MediaPlayer mediaPlayer = new MediaPlayer();
+        MediaPlayer mediaPlayer = new MediaPlayer();
 
-            if (mediaPlayer != null) {
-                mediaPlayer.release();
-                mediaPlayer = null;
-            }
-            try {
-                mediaPlayer = MediaPlayer.create(context, R.raw.plopp);
-                mediaPlayer.start();
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-            }
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
         }
+        try {
+            mediaPlayer = MediaPlayer.create(context, R.raw.plopp);
+            mediaPlayer.start();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -19,7 +19,7 @@ public class MediumActivity extends Activity{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_easy);
+        setContentView(R.layout.activity_medium);
 
         // Get ListView object from xml
         listView = (ListView)findViewById(R.id.list);
@@ -27,6 +27,7 @@ public class MediumActivity extends Activity{
         final Global global = Global.getInstance();
         ArrayList<Puzzle> mediumPackList = (ArrayList)global.mPacks.get(1).getPuzzles();
         ArrayList<String> strList = new ArrayList<String>();
+
         for (int i = 0; i < mediumPackList.size(); i++) {
             int levelNumber = i + 1;
             strList.add("Level " + levelNumber);
@@ -57,15 +58,14 @@ public class MediumActivity extends Activity{
                         .show();
                 goToGame(view);
             }
-
         });
     }
 
     public void goToGame(View view) {
-        SharedPreferences settings = getSharedPreferences( "SwitchPref", MODE_PRIVATE );
+        SharedPreferences settings = getSharedPreferences("SwitchPref", MODE_PRIVATE);
         boolean soundOn = settings.getBoolean("soundSettings", false);
 
-        if(soundOn){
+        if (soundOn) {
             Sound s = new Sound();
             s.playSound(this);
         }
@@ -77,7 +77,7 @@ public class MediumActivity extends Activity{
         boolean soundOn = settings.getBoolean("soundSettings", false);
        // boolean vibrateOn = settings.getBoolean("vibrationSettings", false);
 
-        if (soundOn){
+        if (soundOn) {
             Sound s = new Sound();
             s.playSound(this);
         }

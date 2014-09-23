@@ -55,6 +55,7 @@ public class dotPath {
 
     public void append(Coordinate co) {
         int idx = path.indexOf(co);
+
         if (idx >= 0) {
             for (int i = path.size() - 1; i > idx; --i) {
                 path.remove(i);
@@ -67,9 +68,11 @@ public class dotPath {
 
     @Override
     public boolean equals(Object other) {
+
         if (!(other instanceof dotPath)) {
             return false;
         }
+
         dotPath dP = (dotPath)other;
         return this.getStart().equals(dP.getStart());
     }
@@ -78,10 +81,12 @@ public class dotPath {
         return this.path.contains(coordinate);
     }
 
-    public  void clearFromPath(Coordinate coordinate) {
+    public void clearFromPath(Coordinate coordinate) {
         int j = this.path.indexOf(coordinate);
-        if(j >= 0) {
+
+        if (j >= 0) {
             int size = this.path.size();
+
             for (int i = j; i < size; i++) {
                 this.path.remove(j);
             }

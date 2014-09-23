@@ -16,7 +16,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final int DB_VERSION = 1;
 
     public static final String TableGames = "games";
-    public static final String[] TableGamesCols = { "_id", "gid", "isComplete", "difficulty", "bestMove" };
+    public static final String[] TableGamesCols = { "_id", "gid", "isComplete", "bestMove" };
 
     private static final String sqlCreateTableGames =
             "CREATE TABLE games(" +
@@ -43,7 +43,5 @@ public class DbHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL( sqlDropTableGames );
         onCreate( db );
-
-
     }
 }
