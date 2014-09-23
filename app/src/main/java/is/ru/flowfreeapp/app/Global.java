@@ -9,6 +9,8 @@ import java.util.ArrayList;
 public class Global {
 
     public ArrayList<Pack> mPacks;
+    public int level;
+    public int difficulty;
 
     private static Global mInstance = new Global();
 

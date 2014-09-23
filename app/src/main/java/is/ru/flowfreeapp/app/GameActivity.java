@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 /**
   * @(#)FlowFreeApp 12.9.2014 Anna  
@@ -19,6 +20,13 @@ public class GameActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        Global global = Global.getInstance();
+
+        TextView t = new TextView(this);
+        t = (TextView)findViewById(R.id.levelNumber);
+
+        t.setText(new Integer(global.level+1).toString());
     }
 
     public void backClick(View view) {

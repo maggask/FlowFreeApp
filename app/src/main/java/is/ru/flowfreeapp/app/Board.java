@@ -29,7 +29,7 @@ public class Board extends View {
     private Rect pathRect = new Rect();
     private dotPath m_cellPath = null;
 
-    private boolean[][] board = new boolean[NUM_CELLS][NUM_CELLS];
+    private boolean[][] board = null;
 
     private GameAdapter gameAdapter = new GameAdapter(getContext());
 
@@ -81,10 +81,11 @@ public class Board extends View {
 
         ArrayList<Pack> packList = global.mPacks;
 
-        Puzzle puzzle = packList.get(0).getPuzzles().get(0);
+        Puzzle puzzle = packList.get(global.difficulty).getPuzzles().get(global.level);
 
         int gridSize = Integer.parseInt(puzzle.getSize());
         NUM_CELLS = gridSize;
+        board = new boolean[NUM_CELLS][NUM_CELLS];
         String flows = puzzle.getFlows();
         String[] dotsForm = flows.split("\\,");
         ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
