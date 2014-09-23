@@ -62,22 +62,29 @@ public class MediumActivity extends Activity{
     }
 
     public void goToGame(View view) {
+        SharedPreferences settings = getSharedPreferences( "SwitchPref", MODE_PRIVATE );
+        boolean soundOn = settings.getBoolean("soundSettings", false);
+
+        if(soundOn){
+            Sound s = new Sound();
+            s.playSound(this);
+        }
         startActivity(new Intent(this, GameActivity.class));
     }
 
     public void backClick(View view) {
         SharedPreferences settings = getSharedPreferences("SwitchPref", MODE_PRIVATE);
         boolean soundOn = settings.getBoolean("soundSettings", false);
-        boolean vibrateOn = settings.getBoolean("vibrationSettings", false);
+       // boolean vibrateOn = settings.getBoolean("vibrationSettings", false);
 
         if (soundOn){
             Sound s = new Sound();
             s.playSound(this);
         }
-        if (vibrateOn) {
+       /* if (vibrateOn) {
             Vibration v = new Vibration();
             v.vibrate(this);
-        }
+        }*/
 
         ImageView backButton = (ImageView) view;
         int backId = backButton.getId();

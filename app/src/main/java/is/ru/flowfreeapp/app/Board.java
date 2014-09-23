@@ -3,10 +3,10 @@ package is.ru.flowfreeapp.app;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.*;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.SimpleCursorAdapter;
@@ -330,6 +330,8 @@ public class Board extends View {
                         }
                         if (isVictory)
                             winningFunction();
+                            getVibration(getContext());
+
                     }
                 }
             }
@@ -354,11 +356,22 @@ public class Board extends View {
                 })
                 .setIcon(android.R.drawable.star_big_on)
                 .show();
-        Log.d("Winning", "Just won");
+
     }
 
     public void setColor(int color) {
         m_paintPath.setColor(color);
         invalidate();
+    }
+
+
+
+    public void getVibration(Context context){
+        SharedPreferences settings = context.getSharedPreferences("SwitchPref", Context.MODE_PRIVATE);
+        boolean vibrateOn = settings.getBoolean("vibrationSettings", false);
+        if (vibrateOn) {
+            Vibration v = new Vibration();
+            v.vibrate(context);
+        }
     }
 }

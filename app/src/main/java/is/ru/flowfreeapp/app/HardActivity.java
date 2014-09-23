@@ -62,6 +62,13 @@ public class HardActivity extends Activity {
     }
 
     public void goToGame(View view) {
+        SharedPreferences settings = getSharedPreferences( "SwitchPref", MODE_PRIVATE );
+        boolean soundOn = settings.getBoolean("soundSettings", false);
+
+        if(soundOn){
+            Sound s = new Sound();
+            s.playSound(this);
+        }
         startActivity(new Intent(this, GameActivity.class));
     }
 
