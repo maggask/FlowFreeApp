@@ -6,13 +6,10 @@
               android:weightSum="1">
 
     <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
             android:id="@+id/backButton"
             android:src="@drawable/backbutton"
-            android:padding="5dp"
-            android:clickable="true"
-            android:onClick="backClick"/>
+            android:onClick="backClick"
+            style="@style/BackButton"/>
     <TextView
 
             android:text="Instructions"
@@ -20,35 +17,15 @@
             style="@style/Title"
             />
     <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="Drag to connect matching colors with pipe, creating a flow."
             android:id="@+id/textView2"
-            android:layout_gravity="center_horizontal"
-            android:textSize="20sp"
-            android:gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="30dp"/>
+            style="@style/Instructions"/>
     <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="Pair all colors, and cover the entire board with pipe to solve each puzzle."
             android:id="@+id/textView3"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center"
-            android:textSize="20sp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="30dp"/>
+            style="@style/Instructions"/>
     <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="But watch out, pipes will break if they cross or overlap!"
             android:id="@+id/textView4"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center"
-            android:textSize="20sp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"/>
+            style="@style/Instructions"/>
 </LinearLayout>

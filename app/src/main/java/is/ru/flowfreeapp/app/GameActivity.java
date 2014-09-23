@@ -30,12 +30,12 @@ public class GameActivity extends Activity {
         Global global = Global.getInstance();
         mCursor = gameAdapter.queryGameOnDiffLevel(global.difficulty, global.level);
 
-        String cols[] = DbHelper.TableGamesCols;
+        /*String cols[] = DbHelper.TableGamesCols;
         String from[] = { cols[4] };
         int to[] = { R.id.textNmoves };
         startManagingCursor( mCursor );
         mCA = new SimpleCursorAdapter(this, R.layout.activity_game, mCursor, from, to );
-
+        */
 
         TextView levelTextView = new TextView(this);
         levelTextView = (TextView)findViewById(R.id.levelNumber);
