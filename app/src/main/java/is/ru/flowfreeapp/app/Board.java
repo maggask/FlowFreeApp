@@ -79,7 +79,7 @@ public class Board extends View {
 
         Global global = Global.getInstance();
 
-        ArrayList<Pack> packList = (ArrayList<Pack>) global.mPacks;
+        ArrayList<Pack> packList = global.mPacks;
 
         Puzzle puzzle = packList.get(0).getPuzzles().get(0);
 
@@ -210,7 +210,6 @@ public class Board extends View {
                 }
             }
         }
-        //canvas.drawPath(m_path, m_paintPath);
     }
 
     private boolean areNeighbours(int c1, int r1, int c2, int r2) {
