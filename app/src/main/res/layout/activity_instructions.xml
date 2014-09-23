@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:text="Instructions"
             android:id="@+id/textView"
-            android:textSize="50dp"
+            android:textSize="50sp"
             android:layout_marginBottom="20dp"
             android:textColor="#ff9b30ff"
             android:layout_marginTop="20dp"
@@ -28,7 +28,7 @@
             android:text="Drag to connect matching colors with pipe, creating a flow."
             android:id="@+id/textView2"
             android:layout_gravity="center_horizontal"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:gravity="center"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
@@ -40,7 +40,7 @@
             android:id="@+id/textView3"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="30dp"/>
@@ -51,7 +51,7 @@
             android:id="@+id/textView4"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"/>
 </LinearLayout>
