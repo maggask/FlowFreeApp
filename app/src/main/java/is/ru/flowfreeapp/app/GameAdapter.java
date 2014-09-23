@@ -51,15 +51,16 @@ public class GameAdapter {
         return value;
     }
 
-    public long updateWonGame(int gid, boolean finished, int bestMove) {
+    public long updateWonGame(boolean finished, int bestMove, int difficulty, int level) {
         String[] cols = DbHelper.TableGamesCols;
         ContentValues contentValues = new ContentValues();
-        contentValues.put(cols[1], ((Integer)gid).toString());
+        contentValues.put(cols[1], ((Integer)level).toString());
         contentValues.put(cols[2], finished ? "1" : "0");
-        contentValues.put(cols[3], ((Integer)bestMove).toString());
-
+        contentValues.put(cols[3], ((Integer)difficulty).toString());
+        contentValues.put(cols[4], ((Integer)bestMove).toString());
+        String whereCommand =  cols[1] + "=" + level + " AND " + cols[3] + "=" + difficulty;
         openToWrite();
-        long value = db.update(DbHelper.TableGames, contentValues, cols[1] + "=" + gid, null ); //package id, puzzle id, game id
+        long value = db.update(DbHelper.TableGames, contentValues, whereCommand, null ); //package id, puzzle id, game id
         close();
         return value;
     }
@@ -76,6 +77,14 @@ public class GameAdapter {
         String[] cols = DbHelper.TableGamesCols;
         Cursor cursor = db.query( DbHelper.TableGames,
                 cols, cols[1] + "=" + sid, null, null, null, null);
+        return cursor;
+    }
+
+    public Cursor queryGameOnDiffLevel(int difficulty, int level) {
+        openToRead();
+        String[] cols = DbHelper.TableGamesCols;
+        Cursor cursor = db.query( DbHelper.TableGames,
+                cols, cols[1] + "=" + level + " AND " + cols[3] + "=" + difficulty, null, null, null, null);
         return cursor;
     }
 

@@ -3,9 +3,11 @@ package is.ru.flowfreeapp.app;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 /**
@@ -16,17 +18,34 @@ import android.widget.TextView;
 
 public class GameActivity extends Activity {
 
+    private GameAdapter gameAdapter = new GameAdapter(this);
+    private Cursor mCursor;
+    private SimpleCursorAdapter mCA;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
         Global global = Global.getInstance();
+        mCursor = gameAdapter.queryGameOnDiffLevel(global.difficulty, global.level);
 
-        TextView t = new TextView(this);
-        t = (TextView)findViewById(R.id.levelNumber);
+        String cols[] = DbHelper.TableGamesCols;
+        String from[] = { cols[4] };
+        int to[] = { R.id.textNmoves };
+        startManagingCursor( mCursor );
+        mCA = new SimpleCursorAdapter(this, R.layout.activity_game, mCursor, from, to );
 
-        t.setText(new Integer(global.level+1).toString());
+
+        TextView levelTextView = new TextView(this);
+        levelTextView = (TextView)findViewById(R.id.levelNumber);
+
+        levelTextView.setText(Integer.toString(global.level + 1));
+
+        /*TextView bestMoveTextView = new TextView(this);
+        bestMoveTextView = (TextView)findViewById(R.id.levelNumber);
+
+        bestMoveTextView.setText(new Integer(global.level+1).toString());*/
     }
 
     public void backClick(View view) {

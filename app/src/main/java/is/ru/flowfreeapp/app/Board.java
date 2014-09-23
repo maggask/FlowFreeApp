@@ -63,7 +63,7 @@ public class Board extends View {
 
         mCursor = gameAdapter.queryGames();
         String cols[] = DbHelper.TableGamesCols;
-        String from[] = { cols[1], cols[2], cols[3] };
+        String from[] = { cols[1], cols[2], cols[3], cols[4] };
         //startManagingCursor(mCursor);
 
 
@@ -115,12 +115,6 @@ public class Board extends View {
             j+=2;
             k+=2;
         }
-
-        /*dotPaths.add(new dotPath(new Coordinate(0, 0), new Coordinate(1, 4), Color.GREEN));
-        dotPaths.add(new dotPath(new Coordinate(2, 0), new Coordinate(1, 3), Color.BLACK));
-        dotPaths.add(new dotPath(new Coordinate(2, 1), new Coordinate(2, 4), Color.BLUE));
-        dotPaths.add(new dotPath(new Coordinate(4, 0), new Coordinate(3, 3), Color.WHITE));
-        dotPaths.add(new dotPath(new Coordinate(4, 1), new Coordinate(3, 4), Color.RED));*/
 
     }
 
@@ -356,6 +350,8 @@ public class Board extends View {
                 })
                 .setIcon(android.R.drawable.star_big_on)
                 .show();
+
+
 
     }
 
