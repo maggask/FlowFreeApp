@@ -51,11 +51,12 @@ public class GameAdapter {
         return value;
     }
 
-    public long updateWonGame(int gid, boolean finished, int bestMove) {
+    public long updateWonGame(int gid, boolean finished, int difficulty, int bestMove) {
         String[] cols = DbHelper.TableGamesCols;
         ContentValues contentValues = new ContentValues();
         contentValues.put(cols[1], ((Integer)gid).toString());
         contentValues.put(cols[2], finished ? "1" : "0");
+        contentValues.put(cols[3], ((Integer)difficulty).toString());
         contentValues.put(cols[3], ((Integer)bestMove).toString());
 
         openToWrite();
