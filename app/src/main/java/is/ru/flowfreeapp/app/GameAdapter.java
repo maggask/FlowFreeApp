@@ -37,12 +37,13 @@ public class GameAdapter {
         db.close();
     }
 
-    public long insertGame(int gid, boolean isComplete, int bestMove) {
+    public long insertGame(int gid, boolean isComplete, int difficulty, int bestMove) {
         String[] cols = DbHelper.TableGamesCols;
         ContentValues contentValues = new ContentValues();
         contentValues.put(cols[1], ((Integer)gid).toString());
         contentValues.put(cols[2], isComplete ? "1" : "0");
-        contentValues.put(cols[3], ((Integer)bestMove).toString());
+        contentValues.put(cols[3], ((Integer)difficulty).toString());
+        contentValues.put(cols[4], ((Integer)bestMove).toString());
 
         openToWrite();
         long value = db.insert(DbHelper.TableGames, null, contentValues);

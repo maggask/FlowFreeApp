@@ -16,13 +16,14 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final int DB_VERSION = 1;
 
     public static final String TableGames = "games";
-    public static final String[] TableGamesCols = { "_id", "gid", "isComplete", "bestMove" };
+    public static final String[] TableGamesCols = { "_id", "gid", "isComplete", "difficulty", "bestMove" };
 
     private static final String sqlCreateTableGames =
             "CREATE TABLE games(" +
                     " _id INTEGER PRIMARY KEY AUTOINCREMENT," +
                     " gid INTEGER NOT NULL," +
                     " isComplete BOOLEAN," +
+                    " difficulty INTEGER," +
                     " bestMove INTEGER" +
                     ");";
 
@@ -40,12 +41,9 @@ public class DbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-<<<<<<< HEAD
         db.execSQL( sqlDropTableGames );
         onCreate( db );
-=======
-        db.execSQL(sqlDropTableGames);
-        onCreate(db);
->>>>>>> 363e55803dc2c047201d38442b1c32074f06026d
+
+
     }
 }

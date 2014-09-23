@@ -94,16 +94,12 @@ public class MainActivity extends Activity {
     public void buttonClick( View view ) {
         SharedPreferences settings = getSharedPreferences("SwitchPref", MODE_PRIVATE);
         boolean soundOn = settings.getBoolean("soundSettings", false);
-        boolean vibrateOn = settings.getBoolean("vibrationSettings", false);
 
         if (soundOn) {
             Sound s = new Sound();
             s.playSound(this);
         }
-        if (vibrateOn) {
-            Vibration v = new Vibration();
-            v.vibrate(this);
-        }
+
 
         TextView button = (TextView) view;
         int id = button.getId();
