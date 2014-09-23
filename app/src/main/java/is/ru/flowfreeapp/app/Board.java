@@ -3,11 +3,13 @@ package is.ru.flowfreeapp.app;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.database.Cursor;
 import android.graphics.*;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.SimpleCursorAdapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,6 +30,11 @@ public class Board extends View {
     private dotPath m_cellPath = null;
 
     private boolean[][] board = new boolean[NUM_CELLS][NUM_CELLS];
+
+    private GameAdapter gameAdapter = new GameAdapter(getContext());
+
+    private SimpleCursorAdapter cursorAdapter;
+    private Cursor mCursor;
 
     public int totalMoves = 0;
 
@@ -53,6 +60,12 @@ public class Board extends View {
 
     public Board(Context context, AttributeSet attrs) {
         super(context, attrs);
+
+        mCursor = gameAdapter.queryGames();
+        String cols[] = DbHelper.TableGamesCols;
+        String from[] = { cols[1], cols[2], cols[3] };
+        //startManagingCursor(mCursor);
+
 
         m_paintGrid.setStyle(Paint.Style.STROKE);
         m_paintGrid.setColor(Color.GRAY);

@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 
-public class dbHelper extends SQLiteOpenHelper {
+public class DbHelper extends SQLiteOpenHelper {
 
     public static final String DB_NAME = "GAME_DB";
     public static final int DB_VERSION = 1;
@@ -20,16 +20,16 @@ public class dbHelper extends SQLiteOpenHelper {
 
     private static final String sqlCreateTableGames =
             "CREATE TABLE games(" +
-                    " _id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    " gid INTEGER NOT NULL" +
-                    " isComplete BOOLEAN," +
-                    " bestMove INTEGER" +
-                    ");";
+            " _id INTEGER PRIMARY KEY AUTOINCREMENT," +
+            " gid INTEGER NOT NULL," +
+            " isComplete BOOLEAN," +
+            " bestMove INTEGER" +
+            ");";
 
     private static final String sqlDropTableGames =
             "DROP TABLE IF EXISTS games;";
 
-    public dbHelper(Context context) {
+    public DbHelper(Context context) {
         super( context, DB_NAME, null, DB_VERSION );
     }
 
@@ -40,7 +40,7 @@ public class dbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL( sqlDropTableGames );
-        onCreate( db );
+        db.execSQL(sqlDropTableGames);
+        onCreate(db);
     }
 }
