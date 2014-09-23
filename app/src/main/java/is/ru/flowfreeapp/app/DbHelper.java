@@ -40,12 +40,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-<<<<<<< HEAD
         db.execSQL( sqlDropTableGames );
         onCreate( db );
-=======
-        db.execSQL(sqlDropTableGames);
-        onCreate(db);
->>>>>>> 363e55803dc2c047201d38442b1c32074f06026d
     }
 }
