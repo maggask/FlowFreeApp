@@ -14,7 +14,7 @@ import android.database.sqlite.SQLiteDatabase;
 public class GameAdapter {
 
     SQLiteDatabase db;
-    DbHelper DbHelper;
+    DbHelper dbHelper;
     Context context;
 
     public GameAdapter(Context c) {
@@ -22,14 +22,14 @@ public class GameAdapter {
     }
 
     public GameAdapter openToRead() {
-        DbHelper = new DbHelper(context);
-        db = DbHelper.getReadableDatabase();
+        dbHelper = new DbHelper(context);
+        db = dbHelper.getReadableDatabase();
         return this;
     }
 
     public GameAdapter openToWrite() {
-        DbHelper = new DbHelper(context);
-        db = DbHelper.getWritableDatabase();
+        dbHelper = new DbHelper(context);
+        db = dbHelper.getWritableDatabase();
         return this;
     }
 

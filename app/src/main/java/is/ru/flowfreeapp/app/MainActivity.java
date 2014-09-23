@@ -31,7 +31,7 @@ public class MainActivity extends Activity {
         editor.commit();
         
         try {
-            List<Pack> packs = new ArrayList<Pack>();
+            ArrayList<Pack> packs = new ArrayList<Pack>();
             readPack(getAssets().open("packs/packs.xml"), packs);
             mGlobals.mPacks = packs;
 
