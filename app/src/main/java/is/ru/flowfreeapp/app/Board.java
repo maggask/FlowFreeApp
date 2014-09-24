@@ -416,6 +416,7 @@ public class Board extends View {
                 .setNegativeButton("Try Again", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         reset();
+                        gBal.gActivity.setText(R.id.textNmoves, Integer.toString(0));
                         parseAndSetBoard(difficulty, level);
                     }
                 })
