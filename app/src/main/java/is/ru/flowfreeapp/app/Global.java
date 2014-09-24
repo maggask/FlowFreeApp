@@ -11,6 +11,7 @@ public class Global {
     public ArrayList<Pack> mPacks;
     public int level;
     public int difficulty;
+    public boolean letters;
 
     private static Global mInstance = new Global();
 

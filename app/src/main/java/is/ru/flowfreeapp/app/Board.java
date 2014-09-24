@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.*;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.SimpleCursorAdapter;
@@ -29,6 +30,7 @@ public class Board extends View {
     private Rect pathRect = new Rect();
     private dotPath m_cellPath = null;
 
+    private boolean letters = false;
     private boolean[][] board = null;
 
     private GameAdapter gameAdapter = new GameAdapter(getContext());
@@ -37,7 +39,6 @@ public class Board extends View {
     private Cursor mCursor;
 
     public int totalMoves = 0;
-
     private int totalConnections = 0;
 
     private int xToCol(int x) {
@@ -78,7 +79,7 @@ public class Board extends View {
         m_paintPath.setAntiAlias(true);
 
         Global global = Global.getInstance();
-
+        letters = global.letters;
         ArrayList<Pack> packList = global.mPacks;
 
         Puzzle puzzle = packList.get(global.difficulty).getPuzzles().get(global.level);
@@ -149,31 +150,16 @@ public class Board extends View {
             }
         }
 
-        for (dotPath dP : dotPaths) {
-            Paint circlePaint = new Paint();
-            circlePaint.setStyle(Paint.Style.FILL);
-            circlePaint.setColor(dP.getPathColor());
-            canvas.drawCircle(colToX(dP.getEnd().getCol()) + (m_cellWidth/2),
-                    rowToY(dP.getEnd().getRow()) + (m_cellWidth/2),
-                    (m_cellWidth/2)*(float)0.8, circlePaint
-            );
-            canvas.drawCircle(colToX(dP.getStart().getCol()) + (m_cellWidth/2),
-                    rowToY(dP.getStart().getRow()) + (m_cellWidth/2),
-                    (m_cellWidth/2)*(float)0.8, circlePaint
-            );
-        }
-
-        for(int i = 0; i < board[0].length; i++) {
-            Arrays.fill(board[i], false);
-        }
-
-
         Paint pathPaint = new Paint();
         pathPaint.setStyle(Paint.Style.STROKE);
         pathPaint.setStrokeWidth(32);
         pathPaint.setStrokeCap(Paint.Cap.ROUND);
         pathPaint.setStrokeJoin(Paint.Join.ROUND);
         pathPaint.setAntiAlias(true);
+
+        for(int i = 0; i < board[0].length; i++) {
+            Arrays.fill(board[i], false);
+        }
 
         for (dotPath dP : dotPaths) {
             if (dP.getPath() != null) {
@@ -205,6 +191,31 @@ public class Board extends View {
                 }
             }
         }
+
+        char letter = 'A';
+        for (dotPath dP : dotPaths) {
+            Paint textPaint = new Paint();
+            textPaint.setColor(Color.WHITE);
+            textPaint.setTextSize(m_cellWidth/2);
+
+            Paint circlePaint = new Paint();
+            circlePaint.setStyle(Paint.Style.FILL);
+            circlePaint.setColor(dP.getPathColor());
+            canvas.drawCircle(colToX(dP.getEnd().getCol()) + (m_cellWidth / 2),
+                    rowToY(dP.getEnd().getRow()) + (m_cellWidth / 2),
+                    (m_cellWidth / 2) * (float) 0.8, circlePaint
+            );
+            canvas.drawCircle(colToX(dP.getStart().getCol()) + (m_cellWidth/2),
+                    rowToY(dP.getStart().getRow()) + (m_cellWidth/2),
+                    (m_cellWidth/2)*(float)0.8, circlePaint
+            );
+            if(letters) {
+                canvas.drawText(Character.toString(letter), colToX(dP.getEnd().getCol()) + (float) (m_cellWidth / 3), rowToY(dP.getEnd().getRow()) + (float) (m_cellWidth / 1.5), textPaint);
+                canvas.drawText(Character.toString(letter), colToX(dP.getStart().getCol()) + (float) (m_cellWidth / 3), rowToY(dP.getStart().getRow()) + (float) (m_cellWidth / 1.5), textPaint);
+                letter++;
+            }
+        }
+
     }
 
     private boolean areNeighbours(int c1, int r1, int c2, int r2) {
@@ -224,7 +235,6 @@ public class Board extends View {
         }
 
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
-
             for (dotPath dP : dotPaths){
                 Coordinate c2 = new Coordinate(c, r);
 
@@ -233,9 +243,7 @@ public class Board extends View {
                     dP.reset();
                     m_cellPath.append(c2);
                 }
-
             }
-
         }
         else if (event.getAction() == MotionEvent.ACTION_MOVE) {
 
