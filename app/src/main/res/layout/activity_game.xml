@@ -56,6 +56,26 @@
                 android:layout_marginLeft="5dp"
                 android:layout_gravity="center"
                 />
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/bMoves"
+                android:id="@+id/bestMove"
+                android:textSize="15sp"
+                android:textColor="#ff9b30ff"
+                android:layout_marginLeft="15dp"
+                android:layout_gravity="center"
+                />
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/nMoves"
+                android:id="@+id/bestNmoves"
+                android:textSize="15sp"
+                android:textColor="#ff9b30ff"
+                android:layout_marginLeft="5dp"
+                android:layout_gravity="center"
+                />
     </LinearLayout>
     <is.ru.flowfreeapp.app.Board
             android:id="@+id/board"
