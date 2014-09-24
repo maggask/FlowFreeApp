@@ -67,7 +67,6 @@ public class Board extends View {
         String from[] = { cols[1], cols[2], cols[3], cols[4] };
         //startManagingCursor(mCursor);*/
 
-
         m_paintGrid.setStyle(Paint.Style.STROKE);
         m_paintGrid.setColor(Color.GRAY);
 
@@ -336,10 +335,10 @@ public class Board extends View {
                                     isVictory = false;
                             }
                         }
-                        if (isVictory)
+                        if (isVictory) {
                             winningFunction();
                             getVibration(getContext());
-
+                        }
                     }
                 }
             }
