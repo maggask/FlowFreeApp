@@ -36,6 +36,7 @@ public class Board extends View {
 
     private int level;
     private int difficulty;
+    private Global gBal = Global.getInstance();
 
     private GameAdapter gameAdapter = new GameAdapter(getContext());
 
@@ -326,6 +327,8 @@ public class Board extends View {
                 if (!m_cellPath.isEmpty()) {
                     List<Coordinate> list = m_cellPath.getPath();
                     totalMoves++;
+                    Global global = Global.getInstance();
+                    global.gActivity.setText(R.id.textNmoves, Integer.toString(totalMoves));
                     totalConnections = 0;
 
                     for (dotPath dP : dotPaths) {
@@ -391,6 +394,7 @@ public class Board extends View {
                 .setNegativeButton("Try Again", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         reset();
+                        gBal.gActivity.setText(R.id.levelNumber, Integer.toString(level + 1));
                         parseAndSetBoard(difficulty, level);
                     }
                 })

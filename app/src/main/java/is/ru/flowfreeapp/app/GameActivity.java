@@ -29,12 +29,13 @@ public class GameActivity extends Activity {
         setContentView(R.layout.activity_game);
 
         Global global = Global.getInstance();
+        global.setgActivity(this);
 
         mCursor = gameAdapter.queryGameOnDiffLevel(global.difficulty, global.level);
         String fromDB = "";
         if (mCursor.moveToFirst()) {
             do {
-                fromDB = fromDB + " " + mCursor.getString(4);
+                fromDB = fromDB + mCursor.getString(4);
             } while (mCursor.moveToNext());
         }
 
@@ -50,6 +51,11 @@ public class GameActivity extends Activity {
         bestMoveTextView = (TextView)findViewById(R.id.bestNmoves);
 
         bestMoveTextView.setText(fromDB);
+    }
+
+    public void setText(int id, String text) {
+        TextView element = (TextView) findViewById(id);
+        element.setText(text);
     }
 
     public void backClick(View view) {
