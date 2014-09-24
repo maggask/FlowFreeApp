@@ -18,7 +18,6 @@ import android.widget.TextView;
 
 public class GameActivity extends Activity {
 
-    int tempmoves;
     private GameAdapter gameAdapter = new GameAdapter(this);
     private Cursor mCursor;
     private SimpleCursorAdapter mCA;

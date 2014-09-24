@@ -75,6 +75,15 @@ public class GameAdapter {
         return cursor;
     }
 
+    public Cursor queryGamesByDifficulty(int diff) {
+        openToRead();
+        String[] cols = DbHelper.TableGamesCols;
+        String query = cols[3] + "=" + diff;
+        Cursor cursor = db.query( DbHelper.TableGames,
+                DbHelper.TableGamesCols, query, null, null, null, null);
+        return cursor;
+    }
+
     public Cursor queryGames(int sid) {
         openToRead();
         String[] cols = DbHelper.TableGamesCols;

@@ -3,6 +3,8 @@ package is.ru.flowfreeapp.app;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
@@ -18,6 +20,9 @@ import java.util.ArrayList;
 public class EasyActivity extends Activity {
 
     ListView listView;
+    private GameAdapter gameAdapter = new GameAdapter(this);
+    private Cursor mCursor;
+    private SimpleCursorAdapter mCA;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -28,18 +33,35 @@ public class EasyActivity extends Activity {
         listView = (ListView)findViewById(R.id.list);
 
         final Global global = Global.getInstance();
-        ArrayList<Puzzle> easyPackList = (ArrayList)global.mPacks.get(0).getPuzzles();
-        ArrayList<String> strList = new ArrayList<String>();
 
-        for (int i = 0; i < easyPackList.size(); i++) {
-            int levelNumber = i + 1;
-            strList.add("Level " + levelNumber);
-        }
+        mCursor = gameAdapter.queryGamesByDifficulty(0);
+        String[] cols = DbHelper.TableGamesCols;
+        String[] from = { cols[1], cols[2], cols[3], cols[4] };
+        int to[] = { android.R.id.text1, android.R.id.text1, android.R.id.text1, android.R.id.text1 };
+        mCA = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1, mCursor, from, to);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, android.R.id.text1, strList);
+        mCA.setViewBinder( new SimpleCursorAdapter.ViewBinder() {
+            @Override
+            public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
+                if (columnIndex == 1) {
+                    TextView textView = (TextView)view;
+                    textView.setText("Level " + Integer.toString(cursor.getInt(columnIndex) + 1));
+                    return true;
+                }
+                else if(columnIndex == 2) {
+                    TextView textView = (TextView)view;
+                    if(cursor.getInt(columnIndex) == 1)
+                        textView.setTextColor(Color.GREEN);
+                    else
+                        textView.setTextColor(Color.GRAY);
 
-        listView.setAdapter(adapter);
+                    return true;
+                }
+                return true;
+            }
+        });
+
+        listView.setAdapter(mCA);
 
         // ListView Item Click Listener
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -52,13 +74,6 @@ public class EasyActivity extends Activity {
                 global.difficulty = 0;
                 global.level = itemPosition;
 
-                // ListView Clicked item value
-                String itemValue = (String)listView.getItemAtPosition(position);
-
-                // Show Alert
-                Toast.makeText(getApplicationContext(),
-                        "Position : "+itemPosition+"  ListItem : " +itemValue , Toast.LENGTH_LONG)
-                        .show();
                 goToGame(view);
             }
 
