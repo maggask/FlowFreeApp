@@ -3,8 +3,10 @@ package is.ru.flowfreeapp.app;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -20,11 +22,14 @@ import java.util.List;
 public class MainActivity extends Activity {
 
     private Global mGlobals = Global.getInstance();
+    private GameAdapter gameAdapter = new GameAdapter(this);
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
        
         SharedPreferences settings = getSharedPreferences("SwitchPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = settings.edit();
@@ -43,6 +48,18 @@ public class MainActivity extends Activity {
         catch (Exception e) {
             e.printStackTrace();
         }
+
+        Cursor cursor = gameAdapter.queryGames();
+        if(cursor.getCount() == 0){
+            for (int p = 0; p < mGlobals.mPacks.size(); p++) {
+                Pack pack = mGlobals.mPacks.get(p);
+                List<Puzzle> puzzles = pack.getPuzzles();
+                for(int i = 0; i < puzzles.size(); i++){
+                    gameAdapter.insertGame(i, false, p, 0);            }
+            }
+        }
+        cursor.close();
+        gameAdapter.close();
     }
 
     private void readPack(InputStream is, List<Pack> packs) {

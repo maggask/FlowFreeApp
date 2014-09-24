@@ -156,7 +156,7 @@ public class Board extends View {
 
         Paint pathPaint = new Paint();
         pathPaint.setStyle(Paint.Style.STROKE);
-        pathPaint.setStrokeWidth(32);
+        pathPaint.setStrokeWidth(m_cellWidth/3);  //the width of the line
         pathPaint.setStrokeCap(Paint.Cap.ROUND);
         pathPaint.setStrokeJoin(Paint.Join.ROUND);
         pathPaint.setAntiAlias(true);
