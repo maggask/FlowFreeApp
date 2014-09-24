@@ -29,6 +29,7 @@ public class MainActivity extends Activity {
         SharedPreferences settings = getSharedPreferences("SwitchPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = settings.edit();
         editor.commit();
+        mGlobals.letters = settings.getBoolean("letterSettings", false);
         
         try {
             ArrayList<Pack> packs = new ArrayList<Pack>();

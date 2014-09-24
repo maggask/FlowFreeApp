@@ -44,6 +44,8 @@ public class SettingsActivity extends Activity {
         }
         if (s.getId() == R.id.switch3) {
             setPref("letterSettings", s.isChecked());
+            Global global = Global.getInstance();
+            global.letters = s.isChecked();
         }
     }
 

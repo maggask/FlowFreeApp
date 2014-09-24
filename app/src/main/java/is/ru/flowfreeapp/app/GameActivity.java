@@ -37,6 +37,9 @@ public class GameActivity extends Activity {
         mCA = new SimpleCursorAdapter(this, R.layout.activity_game, mCursor, from, to );
         */
 
+        SharedPreferences settings = getSharedPreferences("SwitchPref", MODE_PRIVATE);
+        global.letters = settings.getBoolean("letterSettings", false);
+
         TextView levelTextView = new TextView(this);
         levelTextView = (TextView)findViewById(R.id.levelNumber);
 
