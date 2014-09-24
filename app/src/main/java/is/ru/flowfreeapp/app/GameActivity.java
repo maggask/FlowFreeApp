@@ -38,12 +38,6 @@ public class GameActivity extends Activity {
             } while (mCursor.moveToNext());
         }
 
-        /*String cols[] = DbHelper.TableGamesCols;
-        String from[] = { cols[4] };
-        int to[] = { R.id.textNmoves };
-        startManagingCursor( mCursor );
-        mCA = new SimpleCursorAdapter(this, R.layout.activity_game, mCursor, from, to );*/
-
         SharedPreferences settings = getSharedPreferences("SwitchPref", MODE_PRIVATE);
         global.letters = settings.getBoolean("letterSettings", false);
 
