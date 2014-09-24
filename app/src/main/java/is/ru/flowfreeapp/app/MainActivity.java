@@ -29,8 +29,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-       
         SharedPreferences settings = getSharedPreferences("SwitchPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = settings.edit();
         editor.commit();
@@ -50,14 +48,16 @@ public class MainActivity extends Activity {
         }
 
         Cursor cursor = gameAdapter.queryGames();
-        if(cursor.getCount() == 0){
+
+        if (cursor.getCount() == 0){
             for (int p = 0; p < mGlobals.mPacks.size(); p++) {
                 Pack pack = mGlobals.mPacks.get(p);
                 List<Puzzle> puzzles = pack.getPuzzles();
-                for(int i = 0; i < puzzles.size(); i++){
+                for (int i = 0; i < puzzles.size(); i++){
                     gameAdapter.insertGame(i, false, p, 0);            }
             }
         }
+
         cursor.close();
         gameAdapter.close();
     }

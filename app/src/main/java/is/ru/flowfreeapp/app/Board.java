@@ -102,10 +102,11 @@ public class Board extends View {
                 else
                     coordinates.add(new Coordinate(Integer.parseInt(store), Integer.parseInt(dot[i])));
             }
-
         }
+
         int j = 0, k = 1;
         Random rand = new Random();
+
         // TODO: check if size is odd
         for (int i = 0; i < coordinates.size()/2; i++) {
             int r = rand.nextInt(255);
@@ -163,11 +164,11 @@ public class Board extends View {
         for (dotPath dP : dotPaths) {
             if (dP.getPath() != null) {
                 if (!dP.getPath().isEmpty()) {
-
                     Coordinate coTo = dP.getPath().get(0);
                     Path forPath = new Path();
                     forPath.moveTo(colToX(coTo.getCol()) + m_cellWidth / 2,
                             rowToY(coTo.getRow()) + m_cellHeight / 2);
+
                     for (Coordinate coO : dP.getPath()) {
                         int x = colToX(coO.getCol());
                         int y = rowToY(coO.getRow());
@@ -276,13 +277,15 @@ public class Board extends View {
                                         break;
                                     }
                                 }
-                            } else {
+                            }
+                            else {
                                 if (!dP.equals(m_cellPath) && (dP.getStart().equals(newCo) || dP.getEnd().equals(newCo))) {
                                     dP.setConnected(true);
                                     addToPath = false;
                                     break;
                                 }
                             }
+
                             if (!dP.equals(m_cellPath) && dP.crossesPath(last)) {
                                 dP.clearFromPath(last);
                             }
@@ -309,6 +312,7 @@ public class Board extends View {
                         if (dPList.contains(m_cellPath.getStart()) && dPList.contains(m_cellPath.getEnd())) {
                             dP.setConnected(true);
                         }
+
                         if (m_cellPath.equals(dP)) {
                             List<Coordinate> newList = new ArrayList<Coordinate>();
 
@@ -335,6 +339,7 @@ public class Board extends View {
                                     isVictory = false;
                             }
                         }
+
                         if (isVictory) {
                             winningFunction();
 

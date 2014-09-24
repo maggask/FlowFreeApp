@@ -32,10 +32,10 @@ public class GameActivity extends Activity {
 
         mCursor = gameAdapter.queryGameOnDiffLevel(global.difficulty, global.level);
         String fromDB = "";
-        if(mCursor.moveToFirst()) {
+        if (mCursor.moveToFirst()) {
             do {
                 fromDB = fromDB + " " + mCursor.getString(4);
-            } while(mCursor.moveToNext());
+            } while (mCursor.moveToNext());
         }
 
         String cols[] = DbHelper.TableGamesCols;
@@ -43,7 +43,6 @@ public class GameActivity extends Activity {
         int to[] = { R.id.textNmoves };
         startManagingCursor( mCursor );
         mCA = new SimpleCursorAdapter(this, R.layout.activity_game, mCursor, from, to );
-
 
         SharedPreferences settings = getSharedPreferences("SwitchPref", MODE_PRIVATE);
         global.letters = settings.getBoolean("letterSettings", false);
