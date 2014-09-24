@@ -3,6 +3,7 @@ package is.ru.flowfreeapp.app;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.*;
@@ -10,6 +11,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.SimpleCursorAdapter;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -86,46 +88,53 @@ public class Board extends View {
         difficulty = diff;
 
         ArrayList<Pack> packList = global.mPacks;
+        int total = packList.get(diff).getPuzzles().size();
+        if (packList.get(diff).getPuzzles().size() > lvl) {
+            Puzzle puzzle = packList.get(diff).getPuzzles().get(lvl);
 
-        Puzzle puzzle = packList.get(diff).getPuzzles().get(lvl);
+            NUM_CELLS = Integer.parseInt(puzzle.getSize());
+            board = new boolean[NUM_CELLS][NUM_CELLS];
+            String flows = puzzle.getFlows();
+            String[] dotsForm = flows.split("\\,");
+            ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
 
-        NUM_CELLS = Integer.parseInt(puzzle.getSize());
-        board = new boolean[NUM_CELLS][NUM_CELLS];
-        String flows = puzzle.getFlows();
-        String[] dotsForm = flows.split("\\,");
-        ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
+            for (String dots : dotsForm) {
+                String nolB = dots.replace("(", "");
+                String norB = nolB.replace(")", "");
+                String[] dot = norB.trim().split("\\s+");
+                String store = null;
 
-        for (String dots : dotsForm) {
-            String nolB = dots.replace("(", "");
-            String norB = nolB.replace(")", "");
-            String[] dot = norB.trim().split("\\s+");
-            String store = null;
-
-            for (int i = 0; i < dot.length; i++) {
-                if (i % 2 == 0) {
-                    store = dot[i];
-                }
-                else {
-                    coordinates.add(new Coordinate(Integer.parseInt(store), Integer.parseInt(dot[i])));
+                for (int i = 0; i < dot.length; i++) {
+                    if (i % 2 == 0) {
+                        store = dot[i];
+                    } else {
+                        coordinates.add(new Coordinate(Integer.parseInt(store), Integer.parseInt(dot[i])));
+                    }
                 }
             }
+
+            int j = 0, k = 1;
+            Random rand = new Random();
+
+            // TODO: check if size is odd
+            for (int i = 0; i < coordinates.size() / 2; i++) {
+                int r = rand.nextInt(255);
+                int g = rand.nextInt(255);
+                int b = rand.nextInt(255);
+                int randomColor = Color.rgb(r, g, b);
+                dotPaths.add(new dotPath(coordinates.get(j), coordinates.get(k), randomColor));
+                j += 2;
+                k += 2;
+            }
+
+            invalidate();
         }
-
-        int j = 0, k = 1;
-        Random rand = new Random();
-
-        // TODO: check if size is odd
-        for (int i = 0; i < coordinates.size()/2; i++) {
-            int r = rand.nextInt(255);
-            int g = rand.nextInt(255);
-            int b = rand.nextInt(255);
-            int randomColor = Color.rgb(r,g,b);
-            dotPaths.add(new dotPath(coordinates.get(j), coordinates.get(k), randomColor));
-            j+=2;
-            k+=2;
+        else {
+            Toast.makeText(getContext().getApplicationContext(),
+                    "No more levels in this difficulty!", Toast.LENGTH_LONG)
+                    .show();
+            goToGame(view);
         }
-
-        invalidate();
     }
 
     private void reset() {
