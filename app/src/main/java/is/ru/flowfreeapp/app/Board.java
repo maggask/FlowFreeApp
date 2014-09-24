@@ -82,7 +82,7 @@ public class Board extends View {
 
     private void parseAndSetBoard(int diff, int lvl) {
         Global global = Global.getInstance();
-
+        global.level = lvl;
         level = lvl;
         difficulty = diff;
 
