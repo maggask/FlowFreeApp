@@ -397,6 +397,7 @@ public class Board extends View {
 
         if (bestMove == 0 || bestMove > totalMoves) {
             bestMove = totalMoves;
+            gBal.gActivity.setText(R.id.bestNmoves, Integer.toString(bestMove));
         }
 
         gameAdapter.updateWonGame(true, bestMove, difficulty, level);
@@ -407,13 +408,14 @@ public class Board extends View {
                 .setPositiveButton("Continue", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         reset();
+                        gBal.gActivity.setText(R.id.levelNumber, Integer.toString(level + 2));
+                        gBal.gActivity.setText(R.id.textNmoves, Integer.toString(0));
                         parseAndSetBoard(difficulty, level + 1);
                     }
                 })
                 .setNegativeButton("Try Again", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         reset();
-                        gBal.gActivity.setText(R.id.levelNumber, Integer.toString(level + 1));
                         parseAndSetBoard(difficulty, level);
                     }
                 })
