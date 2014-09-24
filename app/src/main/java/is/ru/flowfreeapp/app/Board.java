@@ -77,7 +77,6 @@ public class Board extends View {
         Global global = Global.getInstance();
         letters = global.letters;
         parseAndSetBoard(global.difficulty, global.level);
-
     }
 
     private void parseAndSetBoard(int diff, int lvl) {
@@ -103,10 +102,12 @@ public class Board extends View {
             String store = null;
 
             for (int i = 0; i < dot.length; i++) {
-                if (i % 2 == 0)
+                if (i % 2 == 0) {
                     store = dot[i];
-                else
+                }
+                else {
                     coordinates.add(new Coordinate(Integer.parseInt(store), Integer.parseInt(dot[i])));
+                }
             }
         }
 
@@ -123,6 +124,7 @@ public class Board extends View {
             j+=2;
             k+=2;
         }
+
         invalidate();
     }
 
@@ -359,6 +361,7 @@ public class Board extends View {
                 }
             }
         }
+
         return true;
     }
 
@@ -373,7 +376,7 @@ public class Board extends View {
                 .setPositiveButton("Continue", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         reset();
-                        parseAndSetBoard(difficulty, level+1);
+                        parseAndSetBoard(difficulty, level + 1);
                     }
                 })
                 .setNegativeButton("Try Again", new DialogInterface.OnClickListener() {
