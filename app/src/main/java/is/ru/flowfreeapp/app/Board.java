@@ -98,7 +98,7 @@ public class Board extends View {
             String store = null;
 
             for (int i = 0; i < dot.length; i++) {
-                if (i%2 == 0)
+                if (i % 2 == 0)
                     store = dot[i];
                 else
                     coordinates.add(new Coordinate(Integer.parseInt(store), Integer.parseInt(dot[i])));
@@ -298,7 +298,7 @@ public class Board extends View {
             }
         }
         else if (event.getAction() == MotionEvent.ACTION_UP) {
-            if(m_cellPath != null) {
+            if (m_cellPath != null) {
                 if (!m_cellPath.isEmpty()) {
                     List<Coordinate> list = m_cellPath.getPath();
                     totalMoves++;
