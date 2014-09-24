@@ -32,11 +32,11 @@ public class GameActivity extends Activity {
 
         mCursor = gameAdapter.queryGameOnDiffLevel(global.difficulty, global.level);
         String fromDB = "";
-        /*if(mCursor.moveToFirst()) {
+        if(mCursor.moveToFirst()) {
             do {
-                fromDB = fromDB + " " + mCursor.getString(3);
+                fromDB = fromDB + " " + mCursor.getString(4);
             } while(mCursor.moveToNext());
-        }*/
+        }
 
         String cols[] = DbHelper.TableGamesCols;
         String from[] = { cols[4] };
@@ -44,17 +44,6 @@ public class GameActivity extends Activity {
         startManagingCursor( mCursor );
         mCA = new SimpleCursorAdapter(this, R.layout.activity_game, mCursor, from, to );
 
-
-        /*mCA.setViewBinder( new SimpleCursorAdapter.ViewBinder() {
-            @Override
-            public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
-                if ( columnIndex == 4 ) {
-
-                    tempmoves = cursor.getInt(columnIndex);
-                }
-                return false;
-            }
-        });*/
 
         SharedPreferences settings = getSharedPreferences("SwitchPref", MODE_PRIVATE);
         global.letters = settings.getBoolean("letterSettings", false);
@@ -65,9 +54,9 @@ public class GameActivity extends Activity {
         levelTextView.setText(Integer.toString(global.level + 1));
 
         TextView bestMoveTextView = new TextView(this);
-        bestMoveTextView = (TextView)findViewById(R.id.levelNumber);
+        bestMoveTextView = (TextView)findViewById(R.id.textNmoves);
 
-        //bestMoveTextView.setText(new Integer(mCA.).toString());
+        bestMoveTextView.setText(fromDB);
     }
 
     public void backClick(View view) {

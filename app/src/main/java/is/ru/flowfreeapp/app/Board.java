@@ -65,11 +65,6 @@ public class Board extends View {
     public Board(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        /*mCursor = gameAdapter.queryGames();
-        String cols[] = DbHelper.TableGamesCols;
-        String from[] = { cols[1], cols[2], cols[3], cols[4] };
-        //startManagingCursor(mCursor);*/
-
         m_paintGrid.setStyle(Paint.Style.STROKE);
         m_paintGrid.setColor(Color.GRAY);
 
