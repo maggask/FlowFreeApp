@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.*;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.SimpleCursorAdapter;
@@ -77,14 +76,21 @@ public class Board extends View {
 
         Global global = Global.getInstance();
         letters = global.letters;
-        level = global.level;
-        difficulty = global.difficulty;
+        parseAndSetBoard(global.difficulty, global.level);
+
+    }
+
+    private void parseAndSetBoard(int diff, int lvl) {
+        Global global = Global.getInstance();
+
+        level = lvl;
+        difficulty = diff;
+
         ArrayList<Pack> packList = global.mPacks;
 
-        Puzzle puzzle = packList.get(global.difficulty).getPuzzles().get(global.level);
+        Puzzle puzzle = packList.get(diff).getPuzzles().get(lvl);
 
-        int gridSize = Integer.parseInt(puzzle.getSize());
-        NUM_CELLS = gridSize;
+        NUM_CELLS = Integer.parseInt(puzzle.getSize());
         board = new boolean[NUM_CELLS][NUM_CELLS];
         String flows = puzzle.getFlows();
         String[] dotsForm = flows.split("\\,");
@@ -104,6 +110,7 @@ public class Board extends View {
             }
 
         }
+
         int j = 0, k = 1;
         Random rand = new Random();
         // TODO: check if size is odd
@@ -116,7 +123,12 @@ public class Board extends View {
             j+=2;
             k+=2;
         }
+        invalidate();
+    }
 
+    private void reset() {
+        dotPaths.clear();
+        totalMoves = 0;
     }
 
     @Override
@@ -356,7 +368,8 @@ public class Board extends View {
                 .setMessage("Hurray! You won!")
                 .setPositiveButton("Continue", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        // continue with delete
+                        reset();
+                        parseAndSetBoard(difficulty, level+1);
                     }
                 })
                 .setNegativeButton("Try Again", new DialogInterface.OnClickListener() {

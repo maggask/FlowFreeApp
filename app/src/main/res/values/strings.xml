@@ -5,6 +5,8 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="moves">Moves: </string>
+    <string name="bMoves">Best: </string>
     <string name="nMoves">0</string>
+    <string name="bestNmove">0</string>
 
 </resources>
