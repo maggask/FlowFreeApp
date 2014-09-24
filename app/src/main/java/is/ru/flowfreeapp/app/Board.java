@@ -381,7 +381,8 @@ public class Board extends View {
                 })
                 .setNegativeButton("Try Again", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        // do nothing
+                        reset();
+                        parseAndSetBoard(difficulty, level);
                     }
                 })
                 .setIcon(android.R.drawable.star_big_on)
