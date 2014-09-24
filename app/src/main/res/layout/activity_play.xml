@@ -4,13 +4,10 @@
         android:layout_height="fill_parent"
         xmlns:android="http://schemas.android.com/apk/res/android">
     <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
             android:id="@+id/backButton"
             android:src="@drawable/backbutton"
             android:onClick="backClick"
-            android:clickable="true"
-            android:padding="5dp"/>
+            style="@style/BackButton"/>
     <TextView
             android:text="Play"
             android:id="@+id/textView"

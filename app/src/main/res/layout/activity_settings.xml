@@ -5,14 +5,10 @@
               android:layout_height="fill_parent"
         >
     <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
             android:id="@+id/backButton"
             android:src="@drawable/backbutton"
-            android:layout_gravity="left"
-            android:clickable="true"
             android:onClick="backClick"
-            android:padding="5dp"/>
+            style="@style/BackButton"/>
     <TextView
             android:text="Settings"
             android:id="@+id/textView"
