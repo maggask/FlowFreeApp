@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 public class GameActivity extends Activity {
 
+    int tempmoves;
     private GameAdapter gameAdapter = new GameAdapter(this);
     private Cursor mCursor;
     private SimpleCursorAdapter mCA;
@@ -28,14 +29,32 @@ public class GameActivity extends Activity {
         setContentView(R.layout.activity_game);
 
         Global global = Global.getInstance();
-        mCursor = gameAdapter.queryGameOnDiffLevel(global.difficulty, global.level);
 
-        /*String cols[] = DbHelper.TableGamesCols;
+        mCursor = gameAdapter.queryGameOnDiffLevel(global.difficulty, global.level);
+        String fromDB = "";
+        /*if(mCursor.moveToFirst()) {
+            do {
+                fromDB = fromDB + " " + mCursor.getString(3);
+            } while(mCursor.moveToNext());
+        }*/
+
+        String cols[] = DbHelper.TableGamesCols;
         String from[] = { cols[4] };
         int to[] = { R.id.textNmoves };
         startManagingCursor( mCursor );
         mCA = new SimpleCursorAdapter(this, R.layout.activity_game, mCursor, from, to );
-        */
+
+
+        /*mCA.setViewBinder( new SimpleCursorAdapter.ViewBinder() {
+            @Override
+            public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
+                if ( columnIndex == 4 ) {
+
+                    tempmoves = cursor.getInt(columnIndex);
+                }
+                return false;
+            }
+        });*/
 
         SharedPreferences settings = getSharedPreferences("SwitchPref", MODE_PRIVATE);
         global.letters = settings.getBoolean("letterSettings", false);
@@ -45,10 +64,10 @@ public class GameActivity extends Activity {
 
         levelTextView.setText(Integer.toString(global.level + 1));
 
-        /*TextView bestMoveTextView = new TextView(this);
+        TextView bestMoveTextView = new TextView(this);
         bestMoveTextView = (TextView)findViewById(R.id.levelNumber);
 
-        bestMoveTextView.setText(new Integer(global.level+1).toString());*/
+        //bestMoveTextView.setText(new Integer(mCA.).toString());
     }
 
     public void backClick(View view) {
