@@ -29,6 +29,10 @@ public class Board extends View {
     private Rect pathRect = new Rect();
     private dotPath m_cellPath = null;
 
+    private String fromDB = "";
+
+    private int bestMove = 0;
+
     private boolean letters = false;
     private boolean[][] board = null;
 
@@ -77,6 +81,14 @@ public class Board extends View {
         Global global = Global.getInstance();
         letters = global.letters;
         parseAndSetBoard(global.difficulty, global.level);
+
+        mCursor = gameAdapter.queryGameOnDiffLevel(difficulty, level);
+
+        if (mCursor.moveToFirst()) {
+            do {
+                fromDB = mCursor.getString(4);
+            } while (mCursor.moveToNext());
+        }
     }
 
     private void parseAndSetBoard(int diff, int lvl) {
@@ -368,7 +380,14 @@ public class Board extends View {
     private void winningFunction() {
 
         getVibration(getContext());
-        gameAdapter.updateWonGame(true, totalMoves, difficulty, level);
+
+        bestMove = Integer.parseInt(fromDB);
+
+        if (bestMove == 0 || bestMove > totalMoves) {
+            bestMove = totalMoves;
+        }
+
+        gameAdapter.updateWonGame(true, bestMove, difficulty, level);
 
         new AlertDialog.Builder(getContext())
                 .setTitle("Victory!")
