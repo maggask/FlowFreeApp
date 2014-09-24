@@ -46,16 +46,4 @@
             android:textSize="30sp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"/>
-    <Button
-            android:layout_width="231dp"
-            android:layout_height="wrap_content"
-            android:text="Reset Progress"
-            android:id="@+id/button"
-            android:layout_marginTop="40dp"
-            android:layout_marginLeft="100dp"
-            android:layout_marginRight="100dp"
-            android:textColor="#ff9b30ff"
-            android:textSize="25dp"
-            android:gravity="center|center_horizontal"
-            android:layout_gravity="center_horizontal"/>
 </LinearLayout>
