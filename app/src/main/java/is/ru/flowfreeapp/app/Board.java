@@ -133,7 +133,7 @@ public class Board extends View {
             Toast.makeText(getContext().getApplicationContext(),
                     "No more levels in this difficulty!", Toast.LENGTH_LONG)
                     .show();
-            goToGame(view);
+            getContext().startActivity(new Intent(getContext(), PlayActivity.class));
         }
     }
 
