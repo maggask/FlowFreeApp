@@ -76,30 +76,6 @@ public class EasyActivity extends Activity {
         startActivity(new Intent(this, GameActivity.class));
     }
 
-    /*public void buttonClick(View view) {
-        SharedPreferences settings = getSharedPreferences( "SwitchPref", MODE_PRIVATE );
-        boolean soundOn = settings.getBoolean("soundSettings", false);
-
-        if(soundOn){
-            Sound s = new Sound();
-            s.playSound(this);
-        }
-        ImageButton button = (ImageButton) view;
-        int id = button.getId();
-        if (id == R.id.game1) {
-            startActivity(new Intent(this, GameActivity.class));
-        }
-        if (id == R.id.game2) {
-            startActivity(new Intent(this, GameActivity.class));
-        }
-        if (id == R.id.game3) {
-            startActivity(new Intent(this, GameActivity.class));
-        }
-        if (id == R.id.game4) {
-            startActivity(new Intent(this, GameActivity.class));
-        }
-    }*/
-
     public void backClick(View view) {
         SharedPreferences settings = getSharedPreferences("SwitchPref", MODE_PRIVATE);
         boolean soundOn = settings.getBoolean("soundSettings", false);

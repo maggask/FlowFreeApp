@@ -33,6 +33,9 @@ public class Board extends View {
     private boolean letters = false;
     private boolean[][] board = null;
 
+    private int level;
+    private int difficulty;
+
     private GameAdapter gameAdapter = new GameAdapter(getContext());
 
     private SimpleCursorAdapter cursorAdapter;
@@ -79,6 +82,8 @@ public class Board extends View {
 
         Global global = Global.getInstance();
         letters = global.letters;
+        level = global.level;
+        difficulty = global.difficulty;
         ArrayList<Pack> packList = global.mPacks;
 
         Puzzle puzzle = packList.get(global.difficulty).getPuzzles().get(global.level);
@@ -337,7 +342,7 @@ public class Board extends View {
                         }
                         if (isVictory) {
                             winningFunction();
-                            getVibration(getContext());
+
                         }
                     }
                 }
@@ -347,6 +352,9 @@ public class Board extends View {
     }
 
     private void winningFunction() {
+
+        getVibration(getContext());
+        gameAdapter.updateWonGame(true, totalMoves, difficulty, level);
 
         new AlertDialog.Builder(getContext())
                 .setTitle("Victory!")
